@@ -1,0 +1,5 @@
+C:\Users\Joey\Documents\AndroidStudio\WORM-SP\app\build\intermediates\classes\debug
+C:\Users\Joey\Documents\AndroidStudio\WORM-SP\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-8d509287984c80889660187b46d417cf6aae26cc.jar
+C:\Users\Joey\Documents\AndroidStudio\WORM-SP\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-7b80ac9d676dbaba0c16c4247312ec3df152d58c.jar
+C:\Users\Joey\Documents\AndroidStudio\WORM-SP\app\build\intermediates\pre-dexed\debug\classes-f0463887f18ab1a545f3171f7853aceaa8927d0a.jar
+C:\Users\Joey\Documents\AndroidStudio\WORM-SP\app\build\intermediates\pre-dexed\debug\classes-ba929948a6bfaf241262463183e06427f25cba91.jar
