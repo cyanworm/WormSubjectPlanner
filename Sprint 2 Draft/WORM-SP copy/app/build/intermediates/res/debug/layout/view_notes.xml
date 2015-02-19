@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bgimage"
+    tools:context="com.example.wormsubjectplanner.SampleViewNoteWindow" >
+
+    <TextView
+        android:id="@+id/viewnotes_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/content_samplenote"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+ 	<TextView
+ 	    android:id="@+id/viewnotes_date"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_below="@+id/viewnotes_title"
+ 	    android:layout_centerHorizontal="true"
+ 	    android:layout_marginTop="5dp"
+ 	    android:text="@string/content_sampledate"
+ 	    android:textAppearance="?android:attr/textAppearanceSmall" />    
+ 	
+ 	<TextView
+ 	    android:id="@+id/viewnotes_content"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_alignParentRight="true"
+ 	    android:layout_below="@+id/viewnotes_date"
+ 	    android:layout_marginTop="20dp"
+ 	    android:text="@string/content_samplecontent"
+ 	    android:textAppearance="?android:attr/textAppearanceSmall" />
+ 	
+   	<Button
+        android:id="@+id/viewnotes_home"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/home" />
+    
+</RelativeLayout>
+<!-- From: file:/Users/JoniMarie/Desktop/WORM-SP%20copy/app/src/main/res/layout/view_notes.xml -->

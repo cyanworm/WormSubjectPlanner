@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:src="@drawable/bgimage"
+		android:tileMode="repeat"
+		android:dither="true"	>
+
+</bitmap>
+		<!-- From: file:/Users/JoniMarie/Desktop/WORM-SP%20copy/app/src/main/res/drawable/bg.xml -->
