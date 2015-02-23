@@ -76,6 +76,7 @@ public class SubjectsWindow extends ActionBarActivity {
     LinearLayout ll;
     String subjectName;
     SubjectsDAO subjectsDAO = new SubjectsDAO();
+    String temp = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -150,10 +151,8 @@ public class SubjectsWindow extends ActionBarActivity {
     public void viewSubjects() {
         List<Subjects> newList = new ArrayList<Subjects>();
         newList = subjectsDAO.getSubjectsList();
-
         ll.removeAllViews();
         int n = newList.size();
-        String temp = "";
         for(int a =0; a < n; a++){
             temp = newList.get(a).getSubjectName();
             Button sub = new Button(this);
@@ -162,6 +161,7 @@ public class SubjectsWindow extends ActionBarActivity {
             sub.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
                     Intent notes_screen = new Intent(SubjectsWindow.this, NotesWindow.class);
+                     notes_screen.putExtra("subname",temp);
                     startActivity(notes_screen);
                 }
             });

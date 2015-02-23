@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-84193c36809eb488683626c9c8420fed9258efb1.jar" />
-    </item>
-    <item
-        jar="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/pre-dexed/debug/classes-bc8ead059bca63032d5cdd03704e502cf4911723.jar" />
+        <dex dex="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\pre-dexed\debug\classes-ab6efb1150f3462a56d8a2eaca5fbaf4c84acb32.jar" />
     </item>
     <item
-        jar="/Applications/Android 2/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="C:\Users\Patrick\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-a30bd588f0572c301f4826cb5365435b62e97304.jar" />
+        <dex dex="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-2347d8da6abef7b5dd1385ff704323b1cc91ef73.jar" />
     </item>
     <item
-        jar="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-2c0f1949edb8748427aecce89e7cf92c76f61bd2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/JoniMarie/Desktop/WORM-SP copy/app/build/intermediates/pre-dexed/debug/classes-8737595c0a886beca39fa5af43278235390225e5.jar" />
+        <dex dex="C:\Users\Patrick\Desktop\WormSubjectPlanner\Sprint 2 Draft\WORM-SP copy\app\build\intermediates\pre-dexed\debug\classes-dde82e4d4236337758aa91e52a16504980360a4d.jar" />
     </item>
 
 </items>

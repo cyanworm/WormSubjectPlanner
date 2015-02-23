@@ -78,9 +78,9 @@ public class NotesDAO {
       create a File notes.txt
       write to file notes.txt
       append the note in the file subject.txt*/
-    public void createNote(Subjects subject, String title, String content) {
-        Notes newNote = new Notes(subject.getSubjectName(),title,content);
-        subject.getNotesList().add(newNote);
+    public void createNote(String subject, String title, String content) {
+        Notes newNote = new Notes(subject,title,content);
+        //subject.getNotesList().add(newNote); //append notes to subject arraylist
 
         File crfile = new File(title + ".txt");
         try {
@@ -89,7 +89,7 @@ public class NotesDAO {
             fOut.write(content.getBytes());
             fOut.close();
 
-            fOut = context.openFileOutput((subject.getSubjectName()) + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+            fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
             fOut.write((title + "\n").getBytes());
             fOut.write(content.getBytes());
             fOut.close();

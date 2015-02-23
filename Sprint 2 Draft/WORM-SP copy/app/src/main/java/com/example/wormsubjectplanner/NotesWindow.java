@@ -74,6 +74,8 @@ public class NotesWindow extends ActionBarActivity {
     String notesContent;
     NotesDAO notesDAO = new NotesDAO();
 //    Subjects subs = new Subjects();
+     Intent intent;
+     String sub;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,9 @@ public class NotesWindow extends ActionBarActivity {
 		setContentView(R.layout.notes);
 
         ll = (LinearLayout) findViewById(R.id.subjectnotes_note_list);
+
+        intent = getIntent();
+        sub = intent.getExtras().getString("subname");
 
         /*Button subjectnotes_add_note = (Button)findViewById(R.id.subjectnotes_add_note);
         
@@ -144,11 +149,10 @@ public class NotesWindow extends ActionBarActivity {
                 }
 
                 else {
-
                     createButton(noteTitle.getText().toString());
                     notesContent = noteContent.getText().toString();
                     notesName = noteTitle.getText().toString();
-                    notesDAO.createNote(subs, notesName, notesContent);
+                    notesDAO.createNote(sub, notesName, notesContent);
                 }
             }
         });
