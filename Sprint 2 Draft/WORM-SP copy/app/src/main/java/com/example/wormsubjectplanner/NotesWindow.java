@@ -38,8 +38,7 @@ for the AY 2014-2015”.
 
 Code History:
 02/13/15 - Jannieca Camba. Added a pop-up window for inputting new note.
-
-File Creation Date:
+File Creation Date: 02/03/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
@@ -67,26 +66,68 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NotesWindow extends ActionBarActivity {
 
-    LinearLayout ll;
-    String notesName;
-    String notesContent;
-    NotesDAO notesDAO = new NotesDAO();
-//    Subjects subs = new Subjects();
+     LinearLayout ll;
      Intent intent;
+     NotesDAO notesDAO = new NotesDAO();
+     SubjectsDAO subjectDAO = Globals.subjectsDAO;
+     List<Subjects> subjectList;
+     Subjects noteSubject;
+     Subjects currentSubj;
+     String currentSubjName;
      String sub;
+     String temp;
+     String notesName;
+     String notesContent;
+     List<Notes> notesList;
+
+     Button.OnClickListener btnclick = new Button.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+               Button button = (Button)v;
+               StringBuilder sb = new StringBuilder();
+               String name = button.getText().toString();
+               notesList = currentSubj.getNotesList();
+               for(int i = 0; i < notesList.size();i++){
+                    if((notesList.get(i).getTitle()).equals(name)){
+                         sb.append("Subject: ");
+                         sb.append(notesList.get(i).getSubject());
+                         sb.append("\n");
+                         sb.append("Title: ");
+                         sb.append(notesList.get(i).getTitle());
+                         sb.append("\n");
+                         sb.append("Content: ");
+                         sb.append(notesList.get(i).getContent());
+                         break;
+                    }
+               }
+               Toast.makeText(getApplicationContext(), sb.toString(), Toast.LENGTH_LONG).show();
+          }
+     };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.notes);
 
-        ll = (LinearLayout) findViewById(R.id.subjectnotes_note_list);
+          ll = (LinearLayout) findViewById(R.id.subjectnotes_note_list);
 
-        intent = getIntent();
-        sub = intent.getExtras().getString("subname");
+          intent = getIntent();
 
+          sub = intent.getExtras().getString("subname");
+          subjectList = subjectDAO.getSubjectsList();
+          for(int i = 0; i < subjectList.size();i++){
+               currentSubj = subjectList.get(i);
+               currentSubjName = currentSubj.getSubjectName();
+               if(currentSubjName.equals(sub)){
+                    noteSubject = currentSubj;
+                    break;
+               }
+          }
         /*Button subjectnotes_add_note = (Button)findViewById(R.id.subjectnotes_add_note);
         
         //add note button to AddNotesWindow
@@ -117,6 +158,7 @@ public class NotesWindow extends ActionBarActivity {
                 openPopup();
             }
         });
+        viewNotes();
 	}
 
 
@@ -153,6 +195,7 @@ public class NotesWindow extends ActionBarActivity {
                     notesContent = noteContent.getText().toString();
                     notesName = noteTitle.getText().toString();
                     notesDAO.createNote(sub, notesName, notesContent);
+                    viewNotes();
                 }
             }
         });
@@ -195,4 +238,18 @@ public class NotesWindow extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+     public void viewNotes(){
+          List<Notes> newList = new ArrayList<>();
+          newList = noteSubject.getNotesList();
+          ll.removeAllViews();
+          for(int i = 0; i < newList.size();i++){
+               temp = newList.get(i).getTitle();
+               Button subs = new Button(this);
+               subs.setText(temp);
+               ll.addView(subs);
+               subs.setOnClickListener(btnclick);
+          }
+     }
+
 }

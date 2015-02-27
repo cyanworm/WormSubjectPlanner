@@ -39,7 +39,7 @@ for the AY 2014-2015”.
 Code History:
 2/13/15 - Jannieca Camba. Added a pop-up window for creation of subject. Implemented dynamic addition of buttons in screen.
 
-File Creation Date:
+File Creation Date: 02/03/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
@@ -61,63 +61,95 @@ import java.util.List;
 //manipulator for the subjects class- class with list of subjects
 public class SubjectsDAO {
      List<Subjects> subjectsList;
-    private Context context;
-    private String sb = "Subjects.txt";
+     private Context context;
+     private String sb = "Subjects.txt";
 
-    FileOutputStream fOut;
-    FileInputStream fIn;
-    InputStreamReader isr;
-    BufferedReader br;
+     FileOutputStream fOut;
+     FileInputStream fIn;
+     FileInputStream fIn2;
+     FileInputStream fIn3;
+     InputStreamReader isr;
+     InputStreamReader isr2;
+     InputStreamReader isr3;
+     BufferedReader br;
+     BufferedReader br2;
+     BufferedReader br3;
 
-    public SubjectsDAO(){
-        context = HomeWindow.getAppContext();
-        subjectsList = new ArrayList<Subjects>();
+     /*
+          SubjectsDAO: 2/12/15 - instantiates a DAO for Subject
+     */
+     public SubjectsDAO(){
+         context = HomeWindow.getAppContext();
+         subjectsList = new ArrayList<Subjects>();
 
-        //file for subjects.txt
-        try {
-            fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fIn = context.openFileInput(sb);
-            isr = new InputStreamReader(fIn);
-            br = new BufferedReader(isr);
-        }
-        catch(Exception e){
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-        populateList();
-    }
+         //file for subjects.txt
+          try {
+               fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fIn = context.openFileInput(sb);
+               isr = new InputStreamReader(fIn);
+               br = new BufferedReader(isr);
+          }
+          catch(Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }
+          populateList();
+     }
 
-    /*create a subjects class
-      append the subject in the file subjects.txt
-      append subject in the arraylist of subjects*/
-    public void createSubject(String subjectName) {
-        try {
-            File crfile = new File(subjectName + ".txt");
-            Subjects newSubject = new Subjects(subjectName);
+     /*
+          createSubject: 2/12/15: creates a Subject class, appends the subjects.txt file
+     */
+     public void createSubject(String subjectName) {
+          try {
+               fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               Subjects newSubject = new Subjects(subjectName);
+               fOut.write((subjectName + "\n").getBytes());
+               fOut.close();
+               subjectsList.add(newSubject);
+          }
+          catch (Exception e) {
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }
+     }
 
-            fOut.write((subjectName + "\n").getBytes());
-            fOut.close();
-
-            subjectsList.add(newSubject);
-        } catch (Exception e) {
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public List getSubjectsList(){
+     /*
+          getSubjectList: 2/15/2015: gets the List of subjects
+      */
+     public List getSubjectsList(){
         return subjectsList;
-    }
+     }
 
-    public void populateList(){
-        String temp;
-        try {
-            while((temp= br.readLine()) != null){
-                Subjects newSub = new Subjects(temp);
-                subjectsList.add(newSub);
-            }
-        }catch(Exception e){
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
+     /*
+          populateList:
+      */
+     public void populateList(){
+          Subjects currentSubject;
+          String temp;
+          String temp2;
+          String subjectName;
+          try {
+               while((temp= br.readLine()) != null){
+                    Subjects newSub = new Subjects(temp);
+                    subjectsList.add(newSub);
+               }
+          }catch(Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }
+          /*
+          try {
+               for(int i = 0; i < subjectsList.size();i++){
+                    currentSubject = subjectsList.get(i);
+                    subjectName= currentSubject.getSubjectName();
+                    fIn2 = context.openFileInput(subjectName+".txt");
+                    isr2 = new InputStreamReader(fIn2);
+                    br2 = new BufferedReader(isr2);
+                    while((temp2 = br2.readLine())!=null){
+                         Notes newNotes = new Notes(subjectName,temp2);
+                         currentSubject.getNotesList().add(newNotes);
+                    }
+                    //fIn2.close();
+               }
+          } catch (Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }*/
+     }
 }

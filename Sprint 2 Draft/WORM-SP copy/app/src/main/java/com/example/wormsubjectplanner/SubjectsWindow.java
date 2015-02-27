@@ -38,8 +38,8 @@ for the AY 2014-2015”.
 
 Code History:
 2/13/15 - Jannieca Camba. Added a pop-up window for creation of subject. Implemented dynamic addition of buttons in screen.
-
-File Creation Date:
+2/20/15 - 02/20/15 - Joni Marie Jimenez. Added .extra() function to pass name of subject
+File Creation Date: 02/03/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
@@ -68,15 +68,28 @@ import android.view.LayoutInflater;
 import android.content.Context;
 import android.widget.Toast;
 import android.widget.LinearLayout;
+import android.view.View.OnClickListener;
 import java.util.List;
 import java.util.ArrayList;
+
 
 public class SubjectsWindow extends ActionBarActivity {
 
     LinearLayout ll;
     String subjectName;
-    SubjectsDAO subjectsDAO = new SubjectsDAO();
+    SubjectsDAO subjectsDAO = Globals.subjectsDAO;
     String temp = "";
+    Button.OnClickListener btnclick = new Button.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+               Button button = (Button)v;
+               String name = button.getText().toString();
+               Intent notes_screen = new Intent(SubjectsWindow.this, NotesWindow.class);
+               notes_screen.putExtra("subname",name);
+               startActivity(notes_screen);
+  //             Toast.makeText(getApplicationContext(), button.getText().toString(), Toast.LENGTH_SHORT).show();
+         }
+    };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +116,7 @@ public class SubjectsWindow extends ActionBarActivity {
                 openPopup();
             }
         });
-
         viewSubjects();
-
     }
 
      public void openPopup() {
@@ -158,13 +169,16 @@ public class SubjectsWindow extends ActionBarActivity {
             Button sub = new Button(this);
             sub.setText(temp);
             ll.addView(sub);
+            sub.setOnClickListener(btnclick);
+
+            /*
             sub.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
                     Intent notes_screen = new Intent(SubjectsWindow.this, NotesWindow.class);
-                     notes_screen.putExtra("subname",temp);
+                    notes_screen.putExtra("subname",temp);
                     startActivity(notes_screen);
                 }
-            });
+            });*/
         }
     }
 

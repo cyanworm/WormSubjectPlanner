@@ -38,8 +38,9 @@ for the AY 2014-2015”.
 
 Code History:
 2/12/15: Patrick Leiniel H. Domingo: Notes DAO overhaul
+2/20/15: Patrick Leiniel H. Domingo: Corrected text format in file, corrected documentation
 
-File Creation Date:
+File Creation Date: 02/03/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
@@ -59,48 +60,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotesDAO {
-    private Context context;
+     private Context context;
 
-    FileOutputStream fOut;
-    FileOutputStream subfOut;
-    FileInputStream fIn;
-    InputStreamReader isr;
-    BufferedReader br;
+     FileOutputStream fOut;
+     FileOutputStream subfOut;
+     FileInputStream fIn;
+     InputStreamReader isr;
+     BufferedReader br;
+     SubjectsDAO subjectsDAO = Globals.subjectsDAO;
+     Subjects currentSubj;
+     String currentSubjName;
+     List<Subjects> subjectsList;
 
-    /* NotesDao: 2/12/15: Patrick Leiniel H. Domingo: instantiates NotesDAO and gets the context of the app */
-    public NotesDAO() {
+     /*
+          NotesDao: 2/12/15: Patrick Leiniel H. Domingo: instantiates NotesDAO and gets the context of the app
+     */
+      public NotesDAO() {
         context = HomeWindow.getAppContext();
     }
 
-    /* createNote: 2/12/15: Patrick Leiniel H. Domingo: called when creating a new Note */
-    /* create a notes class
+      /*
+           createNote: 2/12/15: Patrick Leiniel H. Domingo: called when creating a new Note
+           @param subject - subject of the note
+           @param title - title of the note
+           @param content - content of the note
+      */
+      public void createNote(String subject, String title, String content) {
+          Notes newNote = new Notes(subject,title,content);
+          //subject.getNotesList().add(newNote); //append notes to subject arraylist
+          File crfile = new File(title + ".txt");
+          try {
+               fOut = context.openFileOutput(title + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fOut.write((content+ "\n").getBytes());
+               fOut.close();
+               fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fOut.write((title + "\n").getBytes());
+               fOut.close();
+          } catch (Exception e) {
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }
+          try{
+               subjectsList = subjectsDAO.subjectsList;
+               for(int i = 0; i < subjectsList.size();i++){
+                    currentSubj = subjectsList.get(i);
+                    currentSubjName = currentSubj.getSubjectName();
+                    if(currentSubjName.equals(subject)){
+                         currentSubj.getNotesList().add(newNote);
+                    }
+               }
+          } catch (Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
+          }
+      }
+
+/* Author notes: * create a notes class
       append notes in the arraylist of notes
       create a File notes.txt
       write to file notes.txt
-      append the note in the file subject.txt*/
-    public void createNote(String subject, String title, String content) {
-        Notes newNote = new Notes(subject,title,content);
-        //subject.getNotesList().add(newNote); //append notes to subject arraylist
-
-        File crfile = new File(title + ".txt");
-        try {
-            fOut = context.openFileOutput(title + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fOut.write((title + "\n").getBytes());
-            fOut.write(content.getBytes());
-            fOut.close();
-
-            fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fOut.write((title + "\n").getBytes());
-            fOut.write(content.getBytes());
-            fOut.close();
-
-        } catch (Exception e) {
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-
-
-
+      append the note in the file subject.txt */
 }

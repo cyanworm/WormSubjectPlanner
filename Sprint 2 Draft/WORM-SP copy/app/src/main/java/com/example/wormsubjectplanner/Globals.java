@@ -37,92 +37,20 @@ Department of Computer Science, College of Engineering, University of the Philip
 for the AY 2014-2015”.
 
 Code History:
-2/12/15: Patrick Leiniel H. Domingo: Notes Entity overhaul
-
-
-File Creation Date: 02/03/15
+02/26/15 - Globals class creation
+File Creation Date: 02/27/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
                      students organize their plans and notes according to subjects or
-                     categories. It will contain a scheduler, calendar, and otes pad
-                     specially designed for the user's convenience.
+                     categories. It will contain a scheduler, calendar, notes pad, and doodles
+                     pad specially designed for the user's convenience.
 
- */
+*/
 
 package com.example.wormsubjectplanner;
 
-import java.util.Date;
-import java.io.*;
 
-import android.content.Context;
-
-//a class for each individual notes
-public class Notes {
-     private String subject;
-     private String title;
-     private String content;
-
-
-     /*
-          Notes: 2/12/15: Instantiates a Note entity and instantly calls the setters for a first time creation of a note
-          @param subject - indicates which subject the note is included
-          @param title - title of the note
-          @param content - content of the note
-     */
-
-     public Notes(String subject,String title,String content) {
-
-          setTitle(title);
-          setContent(content);
-          setSubject(subject);
-     }
-
-     public Notes(String subject, String title){
-          setTitle(title);
-          setContent(content);
-     }
-     /*
-          setTitle: 2/12/15: sets the title of the Note by the given parameter
-          @param title - title of the note
-     */
-     public void setTitle(String title){
-          this.title = title;
-     }
-     /*
-          setContent: 2/12/15: sets the title of the Note by the given parameter
-          @param content - content of the note
-     */
-     public void setContent(String content){
-          this.content = content;
-     }
-     /*
-          setSubject: 2/12/15: sets the title of the Note by the given parameter
-          @param subject - subject of the note
-     */
-     public void setSubject(String subject){
-          this.subject = subject;
-     }
-     /*
-          getTitle: 2/12/15: returns the title of the Note
-     */
-     public String getTitle(){
-
-         return title;
-     }
-     /*
-          getTitle: 2/12/15: returns the content of the Note
-     */
-     public String getContent(){
-
-         return content;
-     }
-     /*
-          getTitle: 2/12/15: returns the subject of the Note
-     */
-     public String getSubject(){
-          return subject;
-     }
-
-
+public class Globals {
+     public static SubjectsDAO subjectsDAO = new SubjectsDAO();
 }
