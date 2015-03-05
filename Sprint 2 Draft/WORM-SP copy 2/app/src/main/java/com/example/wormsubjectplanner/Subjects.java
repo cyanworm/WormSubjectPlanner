@@ -59,66 +59,66 @@ import java.util.ArrayList;
 
 //a class per subject
 public class Subjects implements Parcelable{
-    private String subjectName; //the name of the file containing the list of notes
-    private List<Notes> notesList;
+     private String subjectName; //the name of the file containing the list of notes
+     private List<Notes> notesList;
 
-    public Subjects(String subjectName){
-        this.subjectName = subjectName;
-        List<Notes> newNotes = new ArrayList<Notes>();
-        Notes notes = new Notes("CS 190","1","First Note");
-        Notes notes2 = new Notes("CS 190","2","Second Note");
-        newNotes.add(notes);
-        newNotes.add(notes2);
+     public Subjects(String subjectName){
+          this.subjectName = subjectName;
+          List<Notes> newNotes = new ArrayList<Notes>();
+          Notes notes = new Notes("CS 190","1","First Note");
+          Notes notes2 = new Notes("CS 190","2","Second Note");
+          newNotes.add(notes);
+          newNotes.add(notes2);
 
-    }
+     }
 
-    public Subjects(){
+     public Subjects(){
 
-    }
+     }
 
-    public Subjects(Parcel in){
-        notesList = new ArrayList<Notes>();
-        in.readTypedList(notesList,Notes.CREATOR);
-        subjectName = in.readString();
-    }
+     public Subjects(Parcel in){
+          notesList = new ArrayList<Notes>();
+          in.readTypedList(notesList,Notes.CREATOR);
+          subjectName = in.readString();
+     }
 
 
-    public void setSubjectName(String subjectName){
-        this.subjectName = subjectName;
-    }
-    public void setNotesList(List notesList){
-        this.notesList = notesList;
-    }
-    public String getSubjectName(){
-        return subjectName;
-    }
-    public List getNotesList(){
-        return notesList;
-    }
+     public void setSubjectName(String subjectName){
+          this.subjectName = subjectName;
+     }
+     public void setNotesList(List notesList){
+          this.notesList = notesList;
+     }
+     public String getSubjectName(){
+          return subjectName;
+     }
+     public List getNotesList(){
+          return notesList;
+     }
 
-    public void populateNotes(){
+     public void populateNotes(){
 
-    }
+     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+     @Override
+     public int describeContents() {
+          return 0;
+     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(notesList);
-        dest.writeString(subjectName);
-    }
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
+          dest.writeTypedList(notesList);
+          dest.writeString(subjectName);
+     }
 
-    public static final Parcelable.Creator CREATOR =
-        new Parcelable.Creator(){
-            public Subjects createFromParcel(Parcel in){
-                return new Subjects(in);
-            }
-            public Subjects[] newArray(int size){
-                return new Subjects[size];
-            }
+     public static final Parcelable.Creator CREATOR =
+               new Parcelable.Creator(){
+                    public Subjects createFromParcel(Parcel in){
+                         return new Subjects(in);
+                    }
+                    public Subjects[] newArray(int size){
+                         return new Subjects[size];
+                    }
 
-        };
+               };
 }

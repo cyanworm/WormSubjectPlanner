@@ -53,80 +53,116 @@ package com.example.wormsubjectplanner;
 import android.content.Context;
 import android.widget.Toast;
 import java.io.*;
-import java.io.File;
-import java.io.FileOutputStream;
+//import java.io.File;
+//import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotesDAO {
-    private Context context;
+     private Context context;
 
-    FileOutputStream fOut;
-    FileOutputStream subfOut;
-    FileInputStream fIn;
-    InputStreamReader isr;
-    BufferedReader br;
+     FileOutputStream fOut;
+     //    FileOutputStream subfOut;
+     FileInputStream fIn;
+     InputStreamReader isr;
+     BufferedReader br;
+     int kk;
 
-    /* NotesDao: 2/12/15: Patrick Leiniel H. Domingo: instantiates NotesDAO and gets the context of the app */
-    public NotesDAO() {
-        context = HomeWindow.getAppContext();
-    }
+     List<Notes> nnotes;
 
-    /* createNote: 2/12/15: Patrick Leiniel H. Domingo: called when creating a new Note */
+     /* NotesDao: 2/12/15: Patrick Leiniel H. Domingo: instantiates NotesDAO and gets the context of the app */
+     public NotesDAO() {
+          context = HomeWindow.getAppContext();
+          nnotes = new ArrayList<Notes>();
+     }
+
+     /* createNote: 2/12/15: Patrick Leiniel H. Domingo: called when creating a new Note */
     /* create a notes class
       append notes in the arraylist of notes
       create a File notes.txt
       write to file notes.txt
       append the note in the file subject.txt*/
-    public void createNote(Subjects sub, String subject, String title, String content) {
+     public void createNote(String subject, String title, String content) {
+          Notes newNote = new Notes(subject,title,content);
+//        sub.getNotesList().add(newNote); //append notes to subject arraylist
+          Toast.makeText(context,"Have gotten to notesDAO",Toast.LENGTH_SHORT).show();
 
 
-        Notes newNote = new Notes(subject,title,content);
-        sub.getNotesList().add(newNote); //append notes to subject arraylist
+          try{
+               File crfile = new File(title + ".txt");
+       /*    if(crfile == null || !crfile.exists()) {
+               crfile.createNewFile();
+           }
+       */
+               fOut = context.openFileOutput(title + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fOut.write((title + "\n").getBytes());
+               fOut.write(content.getBytes());
+               fOut.close();
 
-        File crfile = new File(title + ".txt");
-        try {
-            fOut = context.openFileOutput(title + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fOut.write((title + "\n").getBytes());
-            fOut.write(content.getBytes());
-            fOut.close();
+               fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fOut.write((title + "\n").getBytes());
+               fOut.write(content.getBytes());
+               fOut.close();
 
-            fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fOut.write((title + "\n").getBytes());
-            fOut.write(content.getBytes());
-            fOut.close();
-
-        } catch (Exception e) {
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    public void deleteNote(Subjects sub){
+          } catch (Exception e) {
+               Toast.makeText(HomeWindow.getAppContext(), "ADDING NOTES ERROR "+e, Toast.LENGTH_LONG).show();
+          }
+     }
 
 
-    }
-
-    public void loadNotes(Subjects subject){
-        try {
-            fIn = context.openFileInput(subject.getSubjectName() + ".txt");
-            isr = new InputStreamReader(fIn);
-            br = new BufferedReader(isr);
-
-            String str = "";
-            while((str = br.readLine()) != null ){
-                //only get the notes title for the mean time
-                Notes newNote = new Notes();
-                newNote.setTitle(str);
-                subject.getNotesList().add(newNote);
-            }
-        }
-        catch(Exception e){
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-
-    }
+     public void deleteNote(Subjects sub){
 
 
+     }
 
+     public List<Notes> loadNotes(String subject){
+          try {
+
+               File file = context.getFileStreamPath(subject + ".txt");
+               if(file == null || !file.exists()){
+                    Toast.makeText(context,"File Not Found ",Toast.LENGTH_SHORT).show();
+                    file.createNewFile();
+               }
+               else {
+                    fIn = context.openFileInput(subject + ".txt");
+                    isr = new InputStreamReader(fIn);
+                    br = new BufferedReader(isr);
+
+                    nnotes = new ArrayList<Notes>();
+                    //    nnotes.clear();
+
+                    if(nnotes==null){
+                         Toast.makeText(context,"Nnotes is null",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+
+//                    Toast.makeText(context,"Nnotes is NOT null " + nnotes.size(),Toast.LENGTH_SHORT).show();
+                         int kk = 0;
+                         String str = "";
+                         while ((str = br.readLine()) != null) {
+                              //only get the notes title for the mean time
+//                    Toast.makeText(context,str,Toast.LENGTH_SHORT).show();
+                              Notes newNote = new Notes();
+                              newNote.setTitle(str);
+//                  subject.getNotesList().add(newNote);
+
+//                        nnotes.add(newNote);
+                              nnotes.add(newNote);
+//                    Toast.makeText(context,nnotes.get(kk).getTitle() + " " + kk,Toast.LENGTH_SHORT).show();
+
+//                    Toast.makeText(context,kk + " is the number",Toast.LENGTH_SHORT).show();
+                              kk++;
+                         }
+//               Toast.makeText(context,nnotes.size() + "",Toast.LENGTH_SHORT).show();
+                         return nnotes;
+                    }
+               }
+
+          }
+          catch(Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), "EERRORR GETTING LIST NOTES "+ e, Toast.LENGTH_SHORT).show();
+          }
+          return nnotes;
+
+     }
 }

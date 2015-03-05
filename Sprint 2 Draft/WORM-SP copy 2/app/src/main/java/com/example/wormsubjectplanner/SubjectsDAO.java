@@ -60,93 +60,103 @@ import java.util.List;
 
 //manipulator for the subjects class- class with list of subjects
 public class SubjectsDAO {
-    List<Subjects> subjectsList;
-    private Context context;
-    private String sb = "Subjects.txt";
+     List<Subjects> subjectsList;
+     private Context context;
+     private String sb = "Subjects.txt";
 
-    FileOutputStream fOut;
-    FileInputStream fIn;
-    InputStreamReader isr;
-    BufferedReader br;
-    BufferedReader brr;
-    NotesDAO notesDAO = new NotesDAO();
+     FileOutputStream fOut;
+     FileOutputStream ffOut;
+     FileInputStream fIn;
+     InputStreamReader isr;
+     BufferedReader br;
+//    BufferedReader brr;
+//    NotesDAO notesDAO = new NotesDAO();
 
-    public SubjectsDAO(){
-        context = HomeWindow.getAppContext();
-        subjectsList = new ArrayList<Subjects>();
+     public SubjectsDAO(){
+          context = HomeWindow.getAppContext();
+          subjectsList = new ArrayList<Subjects>();
 
-        //file for subjects.txt
-        try {
-            fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
-            fIn = context.openFileInput(sb);
-            isr = new InputStreamReader(fIn);
-            br = new BufferedReader(isr);
-            brr = new BufferedReader(isr);
-        }
-        catch(Exception e){
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-        populateList();
-    }
-
-    /*create a subjects class
-      append the subject in the file subjects.txt
-      append subject in the arraylist of subjects*/
-    public void createSubject(String subjectName) {
-        try {
-            File crfile = new File(subjectName + ".txt");
-            Subjects newSubject = new Subjects(subjectName);
-
-            fOut.write((subjectName + "\n").getBytes());
-            fOut.close();
-
-            subjectsList.add(newSubject);
-        } catch (Exception e) {
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //remove subject from arraylist
-    //remove subject from file ->> rewrite file XX cannot be done
-    public void deleteSubject(String subjectName){
-        Subjects ss = new Subjects();
-        int a,n;
-        n = subjectsList.size();
-        for(a=0;a<n;a++){
-            if(subjectsList.get(a).getSubjectName().equals(subjectName)){
-                ss = subjectsList.get(a);
-                break;
+          //file for subjects.txt
+          try {
+        /*    File ss = new File(sb);
+            if(sb == null || !ss.exists()){
+                ss.createNewFile();
             }
-        }
+        */
+               fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+               fIn = context.openFileInput(sb);
+               isr = new InputStreamReader(fIn);
+               br = new BufferedReader(isr);
+//            brr = new BufferedReader(isr);
+          }
+          catch(Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), "Opening SubjectSSSS EERROORR "+e, Toast.LENGTH_LONG).show();
+          }
+          populateList();
+     }
 
-        subjectsList.remove(ss);
+     /*create a subjects class
+       append the subject in the file subjects.txt
+       append subject in the arraylist of subjects*/
+     public void createSubject(String subjectName) {
+          try {
+               File crfile = new File(subjectName + ".txt" );
+        /*    if(crfile == null || !crfile.exists()) {
 
-        int b;
-        for(b=0;b<n;b++){
-            if(b==a){
+                crfile.createNewFile();
+           }*/
+               ffOut = context.openFileOutput(subjectName + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
 
-            }
+               Subjects newSubject = new Subjects(subjectName);
 
-        }
+               fOut.write((subjectName + "\n").getBytes());
+               fOut.close();
 
-    }
+               subjectsList.add(newSubject);
+          } catch (Exception e) {
+               Toast.makeText(HomeWindow.getAppContext(), "SubjectDAO error EERORROR "+ e, Toast.LENGTH_LONG).show();
+          }
+     }
 
-    public List getSubjectsList(){
-        return subjectsList;
-    }
+     //remove subject from arraylist
+     //remove subject from file ->> rewrite file XX cannot be done
+     public void deleteSubject(String subjectName){
+          Subjects ss = new Subjects();
+          int a,n;
+          n = subjectsList.size();
+          for(a=0;a<n;a++){
+               if(subjectsList.get(a).getSubjectName().equals(subjectName)){
+                    ss = subjectsList.get(a);
+                    break;
+               }
+          }
 
-    public void populateList(){
-        String temp;
-        try {
-            while((temp= br.readLine()) != null){
-                Subjects newSub = new Subjects(temp);
-            //    notesDAO.loadNotes(newSub);
-                subjectsList.add(newSub);
-            }
-        }catch(Exception e){
-            Toast.makeText(HomeWindow.getAppContext(), (CharSequence) e, Toast.LENGTH_SHORT).show();
-        }
-    }
+          subjectsList.remove(ss);
+
+          int b;
+          for(b=0;b<n;b++){
+               if(b==a){
+
+               }
+          }
+     }
+
+     public List getSubjectsList(){
+          return subjectsList;
+     }
+
+     public void populateList(){
+          String temp;
+          try {
+               while((temp= br.readLine()) != null){
+                    Subjects newSub = new Subjects(temp);
+                    //    notesDAO.loadNotes(newSub);
+                    subjectsList.add(newSub);
+               }
+          }catch(Exception e){
+               Toast.makeText(HomeWindow.getAppContext(), "populateList EERROORR "+e, Toast.LENGTH_SHORT).show();
+          }
+     }
 
 
 }

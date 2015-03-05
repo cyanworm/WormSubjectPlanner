@@ -37,9 +37,8 @@ Department of Computer Science, College of Engineering, University of the Philip
 for the AY 2014-2015”.
 
 Code History:
-2/13/15 - Jannieca Camba. Some minor changes.
-
-File Creation Date:
+02/26/15 - Globals class creation
+File Creation Date: 02/27/15
 Development Group: Cyan Worm
 Client Group: Blue Navy
 Purpose of software: WORM Subject Planner is a mobile platform application made to help
@@ -49,72 +48,9 @@ Purpose of software: WORM Subject Planner is a mobile platform application made 
 
 */
 
-
 package com.example.wormsubjectplanner;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
 
-
-public class AddNotesWindow extends ActionBarActivity {
-
-	EditText addnotes_title_field, addnotes_date_field, addnotes_content_field;
-	String title = "", content= "";
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_note);
-		
-        /*Button addnotes_save = (Button)findViewById(R.id.addnotes_save);
-        addnotes_title_field = (EditText) findViewById(R.id.addnotes_title_field);
-		addnotes_date_field = (EditText) findViewById(R.id.addnotes_date_field);
-		addnotes_content_field = (EditText) findViewById(R.id.addnotes_content_field);
-
-        //save button to SampleViewNoteWindow
-        addnotes_save.setOnClickListener(new View.OnClickListener()
-        {
-        	public void onClick(View arg0)
-        	{
-        		title = addnotes_title_field.getText().toString().trim();
-	        	content = addnotes_date_field.getText().toString().trim();
-	        	if(title.length() != 0){
-	        		Toast.makeText(getApplicationContext(), "Saving Note", 					                  
-							Toast.LENGTH_SHORT).show();
-	        		SaveNotesController snc = new SaveNotesController(title,content);
-	        		snc.callFileHandler();
-	        	}
-	        	else{
-	        		
-	        		Toast.makeText(getApplicationContext(), "Invalid title",
-							Toast.LENGTH_SHORT).show();
-	        	}
-        		Intent viewnotes_screen = new Intent(AddNotesWindow.this, SampleViewNoteWindow.class);
-        		startActivity(viewnotes_screen);
-        		
-        	}
-        });*/
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_notes, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+public class Globals {
+     public static SubjectsDAO subjectsDAO = new SubjectsDAO();
 }

@@ -59,8 +59,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,152 +70,242 @@ import java.util.List;
 
 public class NotesWindow extends ActionBarActivity {
 
-    LinearLayout ll;
-    String notesName;
-    String notesContent;
-    NotesDAO notesDAO = new NotesDAO();
+     LinearLayout ll;
+     String notesName;
+     String notesContent;
+     NotesDAO notesDAO;
+     Context context;
 
-    Subjects subs;
-    Intent intent;
-    String sub;
-    int a;
-    List<Notes> listNotes = new ArrayList<Notes>();
-    Notes notes = new Notes();
-    String note;
+     Subjects subs;
+     String sub;
+     int a;
+     List<Notes> listNotes;
+     List<Notes> subjNotes;
+     Notes notes = new Notes();
+     String note;
+     int buttonId;
+     int buttonIdCount = 0;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.notes);
+     SubjectsDAO subjectDAO = Globals.subjectsDAO;
+     List<Subjects> subjectList;
+     Subjects noteSubject;
+     Subjects currentSubj;
 
-        Toast.makeText(HomeWindow.getAppContext(), "Have gotten to noteswindows", Toast.LENGTH_SHORT).show();
+     Button.OnClickListener btnclick = new Button.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+               Button button = (Button)v;
+               StringBuilder titleStr = new StringBuilder();
+               StringBuilder contentStr = new StringBuilder();
+               String name = button.getText().toString();
+               //subjNotes = currentSubj.getNotesList();
+               subjNotes = notesDAO.loadNotes(currentSubj.getSubjectName());
 
-        ll = (LinearLayout) findViewById(R.id.subjectnotes_note_list);
+               for(int i = 0; i < subjNotes.size();i++){
+                    if((subjNotes.get(i).getTitle()).equals(name)){
+                         //sb.append("Title: ");
+                         titleStr.append(subjNotes.get(i).getTitle());
+                         contentStr.append(subjNotes.get(i).getContent());
+                         break;
+                    }
+               }
 
-        intent = getIntent();
-        sub = intent.getExtras().getString("subname");
-
-        Bundle data = getIntent().getExtras();
-        if(data!=null){
-            subs = (Subjects) data.getParcelable("com.subjects");
-            listNotes= (List<Notes>)subs.getNotesList();
-            if(listNotes==null){
-
-                Toast.makeText(getBaseContext(),"List notes is NULL",Toast.LENGTH_SHORT).show();
-            }
-            else{
-
-                Toast.makeText(getBaseContext(),"List notes is NNOOTT NULL",Toast.LENGTH_SHORT).show();
-                int n = listNotes.size();
-                Toast.makeText(getBaseContext(),n,Toast.LENGTH_SHORT).show();
-            }
-        }
-        else{
-
-            Toast.makeText(getBaseContext(),"Bundle is null",Toast.LENGTH_SHORT).show();
-        }
-
-
-
-        Button home = (Button)findViewById(R.id.subjectnotes_home);
-        //home button to HomeWindow
-        home.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View arg0)
-            {
-                Intent home_screen = new Intent(NotesWindow.this, HomeWindow.class);
-                startActivity(home_screen);
-            }
-        });
-
-        //button to add notes pop-up
-        Button add_notes = (Button) findViewById(R.id.subjectnotes_add_note);
-        add_notes.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                openPopup();
-            }
-        });
-
-        viewNotes();
-	}
+               Intent view_note_screen = new Intent(NotesWindow.this, ViewNoteWindow.class);
+               view_note_screen.putExtra("note_title", titleStr.toString());
+               view_note_screen.putExtra("note_content", contentStr.toString());
+               startActivity(view_note_screen);
+          }
+     };
 
 
-    public void openPopup() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View layout = inflater.inflate(R.layout.add_note, null);
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.notes);
 
-        final EditText noteTitle = (EditText)layout.findViewById(R.id.addnotes_title_field);
-        final EditText noteContent = (EditText)layout.findViewById(R.id.addnotes_content_field);
+          context = HomeWindow.getAppContext();
+          listNotes = new ArrayList<Notes>();
 
-        final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
-        popupbd.setTitle("Add Note");
-        popupbd.setCancelable(true);
+          notesDAO = new NotesDAO();
 
-        popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int data) {
-            }
-        });
+          ll = (LinearLayout) findViewById(R.id.subjectnotes_note_list);
 
-        popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int data) {
+          subjectList = subjectDAO.getSubjectsList();
 
-                if (noteTitle.getText().toString().isEmpty()) {
-                    Context context = getApplicationContext();
-                    String text = "Invalid title";
-                    int time = Toast.LENGTH_SHORT;
+          for(int i = 0; i < subjectList.size();i++){
+               currentSubj = subjectList.get(i);
+               if(currentSubj.getSubjectName().equals(getIntent().getExtras().getString("subname"))){
+                    noteSubject = currentSubj;
+                    break;
+               }
+          }
 
-                    Toast toast = Toast.makeText(context, text, time);
-                    toast.show();
-                }
+//        intent = getIntent();
+//        sub = intent.getExtras().getString("subname");
 
-                else {
-                    createButton(noteTitle.getText().toString());
-                    notesContent = noteContent.getText().toString();
-                    notesName = noteTitle.getText().toString();
-                    Toast.makeText(getBaseContext(), subs.getSubjectName(), Toast.LENGTH_SHORT).show();
-                    notesDAO.createNote(subs,sub, notesName, notesContent);
-                }
-            }
-        });
+          Bundle data = getIntent().getExtras();
+          if (data != null) {
+               subs = (Subjects) data.getParcelable("com.subjects");
+               sub = subs.getSubjectName();
+//            Toast.makeText(HomeWindow.getAppContext(),sub, Toast.LENGTH_SHORT).show();
 
-        AlertDialog popup = popupbd.create();
-        popup.setView(layout);
-        popup.show();
-    }
+          } else {
+               //Toast.makeText(HomeWindow.getAppContext(), "Have NOT gotten to noteswindows", Toast.LENGTH_SHORT).show();
+          }
 
-    public void createButton(String value) {
-        Button sub = new Button(this);
-        sub.setText(value);
-        ll.addView(sub);
+          /*Button home = (Button) findViewById(R.id.subjectnotes_home);
+          //home button to HomeWindow
+          home.setOnClickListener(new View.OnClickListener() {
+               public void onClick(View arg0) {
+                    Intent home_screen = new Intent(NotesWindow.this, HomeWindow.class);
+                    startActivity(home_screen);
+               }
+          });*/
 
-        sub.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                Intent notes_screen = new Intent(NotesWindow.this, SampleViewNoteWindow.class);
-                startActivity(notes_screen);
-            }
-        });
-    }
+          /*
+   	     <Button
+        android:id="@+id/subjectnotes_home"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/home" />
+           */
 
-    public void viewNotes(){
-        ll.removeAllViews();
+          //button to add notes pop-up
+          Button add_notes = (Button) findViewById(R.id.subjectnotes_add_note);
+          add_notes.setOnClickListener(new View.OnClickListener() {
+               public void onClick(View arg0) {
+                    openPopup();
+               }
+          });
 
-        int n = subs.getNotesList().size();
-        for(a =0; a < n; a++){
-            notes = (Notes)(subs.getNotesList()).get(a);
-            note = notes.getTitle();
-            Button notee = new Button(this);
-            notee.setText(note);
-            ll.addView(notee);
-            notee.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
-                    Intent notes_screen = new Intent(NotesWindow.this, SampleViewNoteWindow.class);
-                    startActivity(notes_screen);
-                }
-            });
-        }
+          viewNotes();
+     }
 
-    }
-	@Override
+
+     public void openPopup() {
+          LayoutInflater inflater = LayoutInflater.from(this);
+          View layout = inflater.inflate(R.layout.add_note, null);
+
+          final EditText noteTitle = (EditText) layout.findViewById(R.id.addnotes_title_field);
+          final EditText noteContent = (EditText) layout.findViewById(R.id.addnotes_content_field);
+
+          final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
+          popupbd.setTitle("Add Note");
+          popupbd.setCancelable(true);
+
+          popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+               }
+          });
+
+          popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+
+                    if (noteTitle.getText().toString().isEmpty()) {
+                         Context context = getApplicationContext();
+                         String text = "Invalid title";
+                         int time = Toast.LENGTH_SHORT;
+
+                         Toast toast = Toast.makeText(context, text, time);
+                         toast.show();
+                    } else {
+                         //    createButton(noteTitle.getText().toString());
+                         notesContent = noteContent.getText().toString();
+                         notesName = noteTitle.getText().toString();
+                         Toast.makeText(context, subs.getSubjectName(), Toast.LENGTH_SHORT).show();
+                         notesDAO.createNote(sub, notesName, notesContent);
+                    }
+                    viewNotes();
+               }
+          });
+
+          AlertDialog popup = popupbd.create();
+          popup.setView(layout);
+          popup.show();
+     }
+
+     public void createButton(String value) {
+          Button sub = new Button(this);
+          sub.setText(value);
+          sub.setId(buttonIdCount);
+          sub.setTextColor(getResources().getColor(R.color.white));
+          ll.addView(sub);
+          buttonIdCount++;
+
+          sub.setOnLongClickListener(new View.OnLongClickListener() {
+               @Override
+               public boolean onLongClick(View vButtonLong) {
+                    buttonId = vButtonLong.getId();
+                    openDelete();
+                    return true;
+               }
+          });
+
+          sub.setOnClickListener(btnclick);
+     }
+
+     public void viewNotes() {
+//      String string;
+          ll.removeAllViews();
+
+          listNotes = notesDAO.loadNotes(sub);
+          int n = listNotes.size();
+//     Toast.makeText(context,n+ "",Toast.LENGTH_SHORT).show();
+          for (a = 0; a < n; a++) {
+               //        notes = (Notes)(subs.getNotesList()).get(a);
+               notes = listNotes.get(a);
+               note = notes.getTitle();
+               Button notee = new Button(this);
+               notee.setText(note);
+               notee.setId(buttonIdCount);
+               notee.setTextColor(getResources().getColor(R.color.white));
+               ll.addView(notee);
+               buttonIdCount++;
+
+               notee.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View vButtonLong) {
+                         buttonId = vButtonLong.getId();
+                         openDelete();
+                         return true;
+                    }
+               });
+
+               notee.setOnClickListener(btnclick);
+          }
+
+     }
+
+     public void openDelete() {
+          LayoutInflater inflaterdel = LayoutInflater.from(this);
+
+          final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
+          popupbddel.setTitle("Delete?");
+          popupbddel.setCancelable(true);
+
+          popupbddel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+                    //sb.setVisibility(View.GONE); //sb = button; pass the id etc
+                    Button buttonDel = (Button) findViewById(buttonId);
+                    buttonDel.setVisibility(View.GONE);
+                    //or
+                    //layoutdel.removeView(sb); //sb = button; pass id etc
+               }
+          });
+
+          popupbddel.setNegativeButton("No", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+               }
+          });
+
+          AlertDialog popupdel = popupbddel.create();
+          popupdel.show();
+     }
+
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.subject_notes, menu);
@@ -234,5 +322,5 @@ public class NotesWindow extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 }

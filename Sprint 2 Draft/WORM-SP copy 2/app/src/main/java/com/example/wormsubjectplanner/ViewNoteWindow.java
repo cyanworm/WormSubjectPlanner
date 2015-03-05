@@ -37,7 +37,7 @@ Department of Computer Science, College of Engineering, University of the Philip
 for the AY 2014-2015”.
 
 Code History:
-2/13/15 - Jannieca Camba. Added a pop-up window for creation of subject. Implemented dynamic addition of buttons in screen.
+02/13/15 - Jannieca Camba. Added a pop-up window for inputting new note.
 
 File Creation Date:
 Development Group: Cyan Worm
@@ -52,49 +52,67 @@ Purpose of software: WORM Subject Planner is a mobile platform application made 
 package com.example.wormsubjectplanner;
 
 import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.view.LayoutInflater;
+import android.widget.ScrollView;
+import android.content.Context;
 import android.view.View;
-import android.widget.Button;
+import android.content.Intent;
 
-public class SampleViewNoteWindow extends ActionBarActivity {
+public class ViewNoteWindow extends ActionBarActivity {
+     TextView viewNoteTitle = null;
+     TextView viewNoteContent = null;
+     String titleStr, contentStr;
+     Intent intent;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.view_notes);
-		
-        Button viewnotes_home = (Button)findViewById(R.id.viewnotes_home);
-        
-        //home button to HomeWindow
-        viewnotes_home.setOnClickListener(new View.OnClickListener()
-        {
-        	public void onClick(View arg0)
-        	{
-        		Intent home_screen = new Intent(SampleViewNoteWindow.this, HomeWindow.class);
-        		startActivity(home_screen);
-        	}
-        });
-	}
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.view_notes, menu);
-		return true;
-	}
+          ScrollView sv = new ScrollView(this);
+          LinearLayout ll = new LinearLayout(this);
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+          intent = getIntent();
+          titleStr = intent.getExtras().getString("note_title");
+          contentStr = intent.getExtras().getString("note_content");
+
+          viewNoteTitle = new TextView(this);
+          viewNoteTitle.setText(titleStr);
+          viewNoteTitle.setTextSize(30);
+          viewNoteContent = new TextView(this);
+          viewNoteContent.setText(contentStr);
+          viewNoteContent.setTextSize(20);
+          ll.setOrientation(LinearLayout.VERTICAL);
+          ll.addView(viewNoteTitle);
+          ll.addView(viewNoteContent);
+
+          sv.addView(ll);
+          setContentView(sv);
+     }
+
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+          // Inflate the menu; this adds items to the action bar if it is present.
+          getMenuInflater().inflate(R.menu.menu_view_note_window, menu);
+          return true;
+     }
+
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+          // Handle action bar item clicks here. The action bar will
+          // automatically handle clicks on the Home/Up button, so long
+          // as you specify a parent activity in AndroidManifest.xml.
+          int id = item.getItemId();
+
+          //noinspection SimplifiableIfStatement
+          if (id == R.id.action_settings) {
+               return true;
+          }
+
+          return super.onOptionsItemSelected(item);
+     }
 }

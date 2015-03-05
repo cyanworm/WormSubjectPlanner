@@ -73,128 +73,182 @@ import java.util.ArrayList;
 
 public class SubjectsWindow extends ActionBarActivity {
 
-    LinearLayout ll;
-    String subjectName;
-    SubjectsDAO subjectsDAO = new SubjectsDAO();
+     LinearLayout ll;
+     String subjectName;
+     SubjectsDAO subjectsDAO;
 
-    String temp = "";
-    int a;
-    List<Subjects> newList = new ArrayList<Subjects>();
-    NotesDAO notes = new NotesDAO();
+     String temp = "";
+     int a;
+     List<Subjects> newList = new ArrayList<Subjects>();
+//    NotesDAO notes = new NotesDAO();
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.subjects);
+     int buttonId;
+     int buttonIdCount = 0;
 
-        ll = (LinearLayout) findViewById(R.id.notes_subject_list);
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.subjects);
 
-        Button home = (Button)findViewById(R.id.notes_home);
-        //home button to HomeWindow
-        home.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View arg0)
-            {
-                Intent home_screen = new Intent(SubjectsWindow.this, HomeWindow.class);
-                startActivity(home_screen);
-            }
-        });
+          ll = (LinearLayout) findViewById(R.id.notes_subject_list);
+          subjectsDAO = new SubjectsDAO();
 
-        //button to add subjects pop-up
-        Button add_notes = (Button) findViewById(R.id.notes_add_subject);
-        add_notes.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                openPopup();
-            }
-        });
+          /*Button home = (Button)findViewById(R.id.notes_home);
+          //home button to HomeWindow
+          home.setOnClickListener(new View.OnClickListener() {
+               public void onClick(View arg0) {
+                    Intent home_screen = new Intent(SubjectsWindow.this, HomeWindow.class);
+                    startActivity(home_screen);
+               }
+          });*/
 
-        viewSubjects();
+          /*
+     	<Button
+        android:id="@+id/notes_home"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/home" />
+           */
 
-    }
+          //button to add subjects pop-up
+          Button add_notes = (Button) findViewById(R.id.notes_add_subject);
+          add_notes.setOnClickListener(new View.OnClickListener() {
+               public void onClick(View arg0) {
+                    openPopup();
+               }
+          });
 
-     public void openPopup() {
-                 LayoutInflater inflater = LayoutInflater.from(this);
-                 View layout = inflater.inflate(R.layout.add_subject, null);
+          viewSubjects();
 
-                 final EditText addsubj = (EditText)layout.findViewById(R.id.add_subject_value);
-
-                 final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
-                 popupbd.setTitle("Add Subject");
-                 popupbd.setCancelable(true);
-
-                 popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                 public void onClick(DialogInterface dialog, int data) {
-                    }
-                 });
-
-                 popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-                     public void onClick(DialogInterface dialog, int data) {
-                         if (addsubj.getText().toString().isEmpty()) {
-                             Context context = getApplicationContext();
-                             String text = "Invalid subject";
-                             int time = Toast.LENGTH_SHORT;
-
-                             Toast toast = Toast.makeText(context, text, time);
-                             toast.show();
-                         }
-
-                         else {
-                             subjectName = addsubj.getText().toString();
-                             subjectsDAO.createSubject(subjectName);
-                             viewSubjects();
-                         }
-                     }
-                 });
-
-                 AlertDialog popup = popupbd.create();
-                 popup.setView(layout);
-                 popup.show();
      }
 
-    public void viewSubjects() {
-        newList = subjectsDAO.getSubjectsList();
-        ll.removeAllViews();
-        int n = newList.size();
-        for(a =0; a < n; a++){
-            temp = newList.get(a).getSubjectName();
-            Button sub = new Button(this);
-            sub.setText(temp);
-            sub.setTag(newList.get(a));
-            ll.addView(sub);
-            sub.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
+     public void openPopup() {
+          LayoutInflater inflater = LayoutInflater.from(this);
+          View layout = inflater.inflate(R.layout.add_subject, null);
 
-                    Intent notes_screen = new Intent(SubjectsWindow.this, NotesWindow.class);
+          final EditText addsubj = (EditText)layout.findViewById(R.id.add_subject_value);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("com.subjects",(Subjects)((Button)arg0).getTag());
+          final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
+          popupbd.setTitle("Add Subject");
+          popupbd.setCancelable(true);
 
-                    notes_screen.putExtra("subname",temp);
-                    notes_screen.putExtras(bundle);
-                    startActivity(notes_screen);
-                }
-            });
-        }
-    }
+          popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+               }
+          });
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.notes, menu);
-		return true;
-	}
+          popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+               @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+               public void onClick(DialogInterface dialog, int data) {
+                    if (addsubj.getText().toString().isEmpty()) {
+                         Context context = getApplicationContext();
+                         String text = "Invalid subject";
+                         int time = Toast.LENGTH_SHORT;
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+                         Toast toast = Toast.makeText(context, text, time);
+                         toast.show();
+                    }
+
+                    else {
+                         subjectName = addsubj.getText().toString();
+                         subjectsDAO.createSubject(subjectName);
+                         viewSubjects();
+                    }
+               }
+          });
+
+          AlertDialog popup = popupbd.create();
+          popup.setView(layout);
+          popup.show();
+     }
+
+     public void viewSubjects() {
+          newList = subjectsDAO.getSubjectsList();
+          ll.removeAllViews();
+          int n = newList.size();
+          for(a =0; a < n; a++){
+               temp = newList.get(a).getSubjectName();
+               Button sub = new Button(this);
+               sub.setText(temp);
+               sub.setTag(newList.get(a));
+               sub.setId(buttonIdCount);
+               sub.setTextColor(getResources().getColor(R.color.white));
+               ll.addView(sub);
+               buttonIdCount++;
+               sub.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                         //                   Toast.makeText(getBaseContext(),"Have set On Click",Toast.LENGTH_SHORT).show();
+                         Intent notes_screen = new Intent(SubjectsWindow.this, NotesWindow.class);
+
+                         Button button = (Button)v;
+                         notes_screen.putExtra("subname", button.getText().toString());
+
+                         Bundle bundle = new Bundle();
+                         bundle.putParcelable("com.subjects",(Subjects)((Button)v).getTag());
+
+//                    notes_screen.putExtra("subname",temp);
+                         notes_screen.putExtras(bundle);
+                         startActivity(notes_screen);
+                    }
+               });
+
+               sub.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View vButtonLong) {
+                         buttonId = vButtonLong.getId();
+                         openDelete();
+                         return true;
+                    }
+               });
+          }
+     }
+
+     public void openDelete() {
+          LayoutInflater inflaterdel = LayoutInflater.from(this);
+          View layoutdel = inflaterdel.inflate(R.layout.empty, null);
+
+          final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
+          popupbddel.setTitle("Delete?");
+          popupbddel.setCancelable(true);
+
+          popupbddel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+                    Button buttonDel = (Button)findViewById(buttonId);
+                    buttonDel.setVisibility(View.GONE);
+               }
+          });
+
+          popupbddel.setNegativeButton("No", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+               }
+          });
+
+          AlertDialog popupdel = popupbddel.create();
+          //popupdel.setView(layoutdel);
+          popupdel.show();
+     }
+
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+          // Inflate the menu; this adds items to the action bar if it is present.
+          getMenuInflater().inflate(R.menu.notes, menu);
+          return true;
+     }
+
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+          // Handle action bar item clicks here. The action bar will
+          // automatically handle clicks on the Home/Up button, so long
+          // as you specify a parent activity in AndroidManifest.xml.
+          int id = item.getItemId();
+          if (id == R.id.action_settings) {
+               return true;
+          }
+          return super.onOptionsItemSelected(item);
+     }
 
 }

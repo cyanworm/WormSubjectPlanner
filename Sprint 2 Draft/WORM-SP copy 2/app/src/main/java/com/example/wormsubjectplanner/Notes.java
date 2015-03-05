@@ -74,16 +74,16 @@ public class Notes implements Parcelable{
           setSubject(subject);
      }
 
-    public Notes(Parcel in){
-        subject = in.readString();
-        title = in.readString();
-        content = in.readString();
+     public Notes(Parcel in){
+          subject = in.readString();
+          title = in.readString();
+          content = in.readString();
 
-    }
+     }
 
-    public Notes(){
+     public Notes(){
 
-    }
+     }
 
      /*setTitle: 2/12/15: sets the title of the Note by the given parameter */
      public void setTitle(String title){
@@ -101,12 +101,12 @@ public class Notes implements Parcelable{
      /*getTitle: 2/12/15: returns the title of the Note*/
      public String getTitle(){
 
-         return this.title;
+          return this.title;
      }
      /*getTitle: 2/12/15: returns the content of the Note*/
      public String getContent(){
 
-         return this.content;
+          return this.content;
      }
      /*getTitle: 2/12/15: returns the subject of the Note*/
      public String getSubject(){
@@ -114,26 +114,26 @@ public class Notes implements Parcelable{
      }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+     @Override
+     public int describeContents() {
+          return 0;
+     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(subject);
-        dest.writeString(content);
-        dest.writeString(title);
-    }
+     @Override
+     public void writeToParcel(Parcel dest, int flags) {
+          dest.writeString(subject);
+          dest.writeString(content);
+          dest.writeString(title);
+     }
 
-    public static final Parcelable.Creator CREATOR =
-            new Parcelable.Creator(){
-                public Notes createFromParcel(Parcel in){
-                    return new Notes(in);
-                }
+     public static final Parcelable.Creator CREATOR =
+               new Parcelable.Creator(){
+                    public Notes createFromParcel(Parcel in){
+                         return new Notes(in);
+                    }
 
-                public Notes[] newArray(int size){
-                    return new Notes[size];
-                }
-            };
+                    public Notes[] newArray(int size){
+                         return new Notes[size];
+                    }
+               };
 }
