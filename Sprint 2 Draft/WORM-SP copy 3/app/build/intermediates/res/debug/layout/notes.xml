@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bgimage"
+    tools:context="com.example.wormsubjectplanner.NotesWindow" >
+
+   	<ImageView
+        android:id="@+id/subjectnotes_notes"
+        android:layout_width="229dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/title_activity_subject_notes"
+        android:src="@drawable/notes_header" />
+
+    <Button
+        android:id="@+id/subjectnotes_add_note"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/subjectnotes_notes"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/content_add"
+        android:background="@drawable/plus_button" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/subjectnotes_add_note"
+      	android:layout_marginTop="10dp"
+        android:layout_above="@+id/subjectnotes_home">
+        
+    		<LinearLayout
+              	android:id="@+id/subjectnotes_note_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"  >
+    			
+    		</LinearLayout>
+    </ScrollView>
+    
+   	<Button
+        android:id="@+id/subjectnotes_home"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/home" />
+   	
+</RelativeLayout>
+<!-- From: file:/Users/JoniMarie/Desktop/WORM-SP%20copy%203/app/src/main/res/layout/notes.xml -->
