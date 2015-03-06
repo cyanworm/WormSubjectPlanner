@@ -1,5 +1,0 @@
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/classes/debug
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-a30bd588f0572c301f4826cb5365435b62e97304.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-ea6a58032d8b4da44ea99f6bf6f6505c05ff12c9.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/classes-ad9221a11261a3fb73c76950611078fb48d8e384.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/classes-b642ff88b4364259859dc1b49dc2469092552d15.jar
