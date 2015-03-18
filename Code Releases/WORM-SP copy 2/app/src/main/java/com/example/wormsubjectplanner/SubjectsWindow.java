@@ -148,14 +148,14 @@ public class SubjectsWindow extends ActionBarActivity {
                     Context context = getApplicationContext();
                     if (addsubj.getText().toString().isEmpty()) {
                          String text = "Invalid subject";
-                         Toast toast = Toast.makeText(context, text, time);
-                         toast.show();
+                         Toast.makeText(context, text, time).show();
+
                     }
 
                     else {
                          subjectName = addsubj.getText().toString();
                          subjectsDAO.createSubject(subjectName);
-                         Toast toast = Toast.makeText(context, "Subject created", time);
+                         Toast.makeText(context, "Subject created", time).show();
                          viewSubjects();
                     }
                }

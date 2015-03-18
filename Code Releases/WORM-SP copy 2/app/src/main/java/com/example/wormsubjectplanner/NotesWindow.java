@@ -272,7 +272,7 @@ public class NotesWindow extends ActionBarActivity {
                     public boolean onLongClick(View vButtonLong) {
                          buttonId = vButtonLong.getId();
                          Button buttonDel = (Button)findViewById(buttonId);
-                      //   openDelete(buttonDel.getText().toString());
+                         openDelete();
                          return true;
                     }
                });
