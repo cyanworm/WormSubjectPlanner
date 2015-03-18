@@ -110,8 +110,8 @@
       <file leaf-file-name="NotesDAO.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43424317" vertical-offset="1202" max-vertical-offset="3060">
-              <caret line="136" column="16" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.3598015" vertical-offset="1334" max-vertical-offset="3094">
+              <caret line="142" column="49" selection-start-line="142" selection-start-column="49" selection-end-line="142" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -2095,8 +2095,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43424317" vertical-offset="1202" max-vertical-offset="3060">
-          <caret line="136" column="16" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.3598015" vertical-offset="1334" max-vertical-offset="3094">
+          <caret line="142" column="49" selection-start-line="142" selection-start-column="49" selection-end-line="142" selection-end-column="49" />
           <folding />
         </state>
       </provider>

@@ -139,6 +139,8 @@ public class NotesDAO {
           File thisFile = new File (context.getFilesDir(),note + ".txt");
           thisFile.delete();
           thisFile = new File(context.getFilesDir(), subject + ".txt");
+          thisFile.delete();
+          File file = new File(subject + ".txt");
           for(int i = 0;  i < newList.size();i++){
                temp = newList.get(i);
                temp2 = temp.getTitle();
