@@ -151,7 +151,6 @@ public class SubjectsDAO {
                         // File dir = getFilesDir();
                          while((ss= br.readLine()) != null ){
                               if(j!= 0){
-                                  Toast.makeText(context,ss,Toast.LENGTH_SHORT).show();
                                   File thisFile = new File(dir, ss + ".txt");
                                   thisFile.delete();
                               }

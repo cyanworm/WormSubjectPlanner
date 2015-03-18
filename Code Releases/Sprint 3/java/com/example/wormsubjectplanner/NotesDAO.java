@@ -126,6 +126,7 @@ public class NotesDAO {
 
 
      public void deleteNote(String subject,String note){
+          Toast.makeText(context,subject+note,Toast.LENGTH_SHORT).show();
           Notes temp;
           String temp2;
           List<Notes> newList = new ArrayList<Notes>();
