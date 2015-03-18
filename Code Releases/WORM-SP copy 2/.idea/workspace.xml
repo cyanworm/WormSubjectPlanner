@@ -94,24 +94,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NotesWindow.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="NotesWindow.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3395" max-vertical-offset="4624">
-              <caret line="288" column="40" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
-              <folding>
-                <element signature="e#6968#6969#0" expanded="true" />
-                <element signature="e#7018#7019#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.55583125" vertical-offset="3380" max-vertical-offset="4352">
+              <caret line="290" column="41" selection-start-line="290" selection-start-column="41" selection-end-line="290" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NotesDAO.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="NotesDAO.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3598015" vertical-offset="1334" max-vertical-offset="3094">
-              <caret line="142" column="49" selection-start-line="142" selection-start-column="49" selection-end-line="142" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1164" max-vertical-offset="3111">
+              <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -1104,10 +1101,10 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/Notes.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/ViewNoteWindow.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/SubjectsWindow.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/SubjectsDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesDAO.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesWindow.java" />
       </list>
     </option>
   </component>
@@ -1714,10 +1711,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2142" max-vertical-offset="5610">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-          <folding>
-            <element signature="e#6968#6969#0" expanded="true" />
-            <element signature="e#7018#7019#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1827,10 +1821,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="935">
           <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-          <folding>
-            <element signature="e#6968#6969#0" expanded="true" />
-            <element signature="e#7018#7019#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1892,10 +1883,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="935">
           <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-          <folding>
-            <element signature="e#6968#6969#0" expanded="true" />
-            <element signature="e#7018#7019#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2066,25 +2054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/Notes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1207">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3395" max-vertical-offset="4624">
-          <caret line="288" column="40" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
-          <folding>
-            <element signature="e#6968#6969#0" expanded="true" />
-            <element signature="e#7018#7019#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/SubjectsDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1512" max-vertical-offset="3349">
@@ -2095,8 +2064,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3598015" vertical-offset="1334" max-vertical-offset="3094">
-          <caret line="142" column="49" selection-start-line="142" selection-start-column="49" selection-end-line="142" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1164" max-vertical-offset="3111">
+          <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/Notes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1207">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/wormsubjectplanner/NotesWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55583125" vertical-offset="3380" max-vertical-offset="4352">
+          <caret line="290" column="41" selection-start-line="290" selection-start-column="41" selection-end-line="290" selection-end-column="41" />
           <folding />
         </state>
       </provider>

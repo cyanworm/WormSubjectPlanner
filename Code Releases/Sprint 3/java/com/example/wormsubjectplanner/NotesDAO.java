@@ -132,7 +132,8 @@ public class NotesDAO {
           List<Notes> newList = new ArrayList<Notes>();
           for(int i = 0; i < nnotes.size();i++){
                temp = nnotes.get(i);
-               if(temp.getTitle().equals(note)){
+               if(temp.getTitle().equals(note)){}
+               else{
                     newList.add(temp);
                }
           }
