@@ -18,8 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/addnotes_content_field"
         android:inputType="textMultiLine"
-        android:layout_gravity="center_horizontal"
         android:hint="@string/content"    />
 
 </LinearLayout>
-<!-- From: file:/Users/JoniMarie/Desktop/WORM-SP%20copy%202/app/src/main/res/layout/add_note.xml -->
+<!-- From: file:/C:/Users/Patrick/Desktop/WormSubjectPlanner/Code%20Releases/WORM-SP%20copy%202/app/src/main/res/layout/add_note.xml -->

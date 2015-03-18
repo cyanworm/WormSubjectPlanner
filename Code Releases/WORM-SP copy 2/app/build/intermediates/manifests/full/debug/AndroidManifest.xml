@@ -16,8 +16,6 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -49,24 +47,12 @@
                 android:value=".SubjectsWindow" />
         </activity>
         <activity
-            android:name="com.example.wormsubjectplanner.AddNotesWindow"
-            android:label="@string/title_activity_add_notes"
-            android:parentActivityName="com.example.wormsubjectplanner.SubjectsWindow" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NotesWindow" />
-        </activity>
-        <activity
-            android:name="com.example.wormsubjectplanner.SampleViewNoteWindow"
-            android:label="@string/title_activity_view_notes"
+            android:name="com.example.wormsubjectplanner.ViewNoteWindow"
+            android:label="@string/title_activity_view_note_window"
             android:parentActivityName="com.example.wormsubjectplanner.NotesWindow" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NotesWindow" />
-        </activity>
-        <activity
-            android:name="com.example.wormsubjectplanner.AddSubjectWindow"
-            android:label="@string/title_activity_add_subject" >
         </activity>
     </application>
 

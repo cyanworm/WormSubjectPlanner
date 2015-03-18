@@ -65,10 +65,6 @@ public class Subjects{
         notesList = newNotes;
     }
 
-    public Subjects(){
-
-
-    }
     public void setSubjectName(String subjectName){
         this.subjectName = subjectName;
     }

@@ -1,5 +1,5 @@
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/classes/debug
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-a30bd588f0572c301f4826cb5365435b62e97304.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-ea6a58032d8b4da44ea99f6bf6f6505c05ff12c9.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/classes-ad9221a11261a3fb73c76950611078fb48d8e384.jar
-/Users/JoniMarie/Desktop/WORM-SP copy 2/app/build/intermediates/pre-dexed/debug/classes-b642ff88b4364259859dc1b49dc2469092552d15.jar
+C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy 2\app\build\intermediates\classes\debug
+C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy 2\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-2347d8da6abef7b5dd1385ff704323b1cc91ef73.jar
+C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy 2\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-d04dbd72e10e6c92347b458cf03803f1b61a7543.jar
+C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy 2\app\build\intermediates\pre-dexed\debug\classes-8851abff027ccf0e8125226a155104108870b8a0.jar
+C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy 2\app\build\intermediates\pre-dexed\debug\classes-e00a88ce305589bf96b0401949f9743bc0d42323.jar

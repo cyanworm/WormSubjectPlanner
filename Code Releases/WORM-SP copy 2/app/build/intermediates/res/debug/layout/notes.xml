@@ -33,8 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/subjectnotes_add_note"
-      	android:layout_marginTop="10dp"
-        android:layout_above="@+id/subjectnotes_home">
+      	android:layout_marginTop="10dp"		 >
         
     		<LinearLayout
               	android:id="@+id/subjectnotes_note_list"
@@ -44,15 +43,6 @@
     			
     		</LinearLayout>
     </ScrollView>
-    
-   	<Button
-        android:id="@+id/subjectnotes_home"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/home" />
    	
 </RelativeLayout>
-<!-- From: file:/Users/JoniMarie/Desktop/WORM-SP%20copy%202/app/src/main/res/layout/notes.xml -->
+<!-- From: file:/C:/Users/Patrick/Desktop/WormSubjectPlanner/Code%20Releases/WORM-SP%20copy%202/app/src/main/res/layout/notes.xml -->
