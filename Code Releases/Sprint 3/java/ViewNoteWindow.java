@@ -99,7 +99,7 @@ public class ViewNoteWindow extends ActionBarActivity {
           ll.addView(viewNoteContent);
 
           sv.addView(ll);
-         // sv.setBackground(getResources().getDrawable(R.drawable.viewnote_bg));
+		  sv.setBackground(getResources().getDrawable(R.drawable.viewnote_bg));
           setContentView(sv);
 
      }
