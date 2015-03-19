@@ -38,6 +38,10 @@ for the AY 2014-2015”.
 
 Code History:
 2/13/15 - Jannieca Camba. Added a pop-up window for creation of subject. Implemented dynamic addition of buttons in screen.
+2/6/15 - Joni Jimenez. Added view subjects.
+03/03/15 - Jannieca Camba. Added pop-up window for deleting subject.
+03/04/15 - Joni Jimenez. Added long on click listener and delete.
+03/05/15 - Patrick Domingo. Fixed delete subject.
 
 File Creation Date:
 Development Group: Cyan Worm
@@ -126,6 +130,9 @@ public class SubjectsWindow extends ActionBarActivity {
 
      }
 
+     /*
+          pop-up for adding a subject
+      */
      public void openPopup() {
           LayoutInflater inflater = LayoutInflater.from(this);
           View layout = inflater.inflate(R.layout.add_subject, null);
@@ -166,6 +173,9 @@ public class SubjectsWindow extends ActionBarActivity {
           popup.show();
      }
 
+     /*
+          list all existing subject
+      */
      public void viewSubjects() {
           newList = subjectsDAO.getSubjectsList();
           ll.removeAllViews();
@@ -211,6 +221,9 @@ public class SubjectsWindow extends ActionBarActivity {
           }
      }
 
+     /*
+          pop-up for deleting a subject
+      */
      public void openDelete() {
           LayoutInflater inflaterdel = LayoutInflater.from(this);
           View layoutdel = inflaterdel.inflate(R.layout.empty, null);

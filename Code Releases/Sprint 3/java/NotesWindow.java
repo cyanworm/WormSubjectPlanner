@@ -38,6 +38,9 @@ for the AY 2014-2015”.
 
 Code History:
 02/13/15 - Jannieca Camba. Added a pop-up window for inputting new note.
+3/03/15 - Jannieca Camba. Added long on click listener for deleting note.
+3/03/15 - Joni Jimenez. Added delete in long on click listener.
+3/04/15 - Patrick Domingo. Fixed delete.
 
 File Creation Date:
 Development Group: Cyan Worm
@@ -91,6 +94,9 @@ public class NotesWindow extends ActionBarActivity {
      Subjects noteSubject;
      Subjects currentSubj;
 
+     /*
+          onclicklistener for button press to view the note
+      */
      Button.OnClickListener btnclick = new Button.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -185,7 +191,9 @@ public class NotesWindow extends ActionBarActivity {
           viewNotes();
      }
 
-
+     /*
+          pop up window for adding a note
+      */
      public void openPopup() {
           LayoutInflater inflater = LayoutInflater.from(this);
           View layout = inflater.inflate(R.layout.add_note, null);
@@ -228,6 +236,9 @@ public class NotesWindow extends ActionBarActivity {
           popup.show();
      }
 
+     /*
+          creates a button for each new note
+      */
      public void createButton(String value) {
           Button sub = new Button(this);
           sub.setText(value);
@@ -249,6 +260,9 @@ public class NotesWindow extends ActionBarActivity {
           sub.setOnClickListener(btnclick);
      }
 
+     /*
+          list all existing notes
+      */
      public void viewNotes() {
 //      String string;
           ll.removeAllViews();
@@ -282,7 +296,9 @@ public class NotesWindow extends ActionBarActivity {
           }
 
      }
-
+     /*
+          pop up for deleting a note
+      */
      public void openDelete() {
           LayoutInflater inflaterdel = LayoutInflater.from(this);
           final String noteTitle = note;

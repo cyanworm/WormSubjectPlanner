@@ -37,8 +37,9 @@ Department of Computer Science, College of Engineering, University of the Philip
 for the AY 2014-2015”.
 
 Code History:
-2/13/15 - Jannieca Camba. Added a pop-up window for creation of subject. Implemented dynamic addition of buttons in screen.
-
+2/13/15 - Patrick Domingo. Subjects DAO overhaul.
+02/18/15 - Joni Jimenez. Added populate.
+03/04/15 - Patrick Domingo. Added delete.
 File Creation Date:
 Development Group: Cyan Worm
 Client Group: Blue Navy
@@ -120,24 +121,15 @@ public class SubjectsDAO {
           }
      }
 
-     //remove subject from arraylist
-     //remove subject from file ->> rewrite file XX cannot be done
+     /*
+          called for deleting a subject
+     */
      public void deleteSubject(String subjectName){
           Subjects temp;
           String name;
           String ss;
-        /*Subjects ss = new Subjects();
-        int a,n;
-        n = subjectsList.size();
-        for(a=0;a<n;a++){
-            if(subjectsList.get(a).getSubjectName().equals(subjectName)){
-                ss = subjectsList.get(a);
-                break;
-            }
-        }
 
-        subjectsList.remove(ss);*/
-          //delete each note;
+          /*delete each note inside the subject*/
           try{
                int j = 0;
                for(int i = 0; i < subjectsList.size();i++){
@@ -188,6 +180,9 @@ public class SubjectsDAO {
           }
      }
 
+     /*
+          returns all the subjects
+      */
      public List getSubjectsList(){
           try {
                String ss;
@@ -210,6 +205,9 @@ public class SubjectsDAO {
           return subjectsList;
      }
 
+     /*
+          initial load of the subjects
+      */
      public void populateList(){
           String temp;
           try {
@@ -223,6 +221,9 @@ public class SubjectsDAO {
           }
      }
 
+     /*
+          rewrite all subject in the file after deleting a subject
+      */
      public void writeToSubject(List<Subjects> subLists){
           try {
 

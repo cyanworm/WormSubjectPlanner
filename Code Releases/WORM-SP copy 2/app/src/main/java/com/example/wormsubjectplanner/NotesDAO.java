@@ -38,7 +38,9 @@ for the AY 2014-2015”.
 
 Code History:
 2/12/15: Patrick Leiniel H. Domingo: Notes DAO overhaul
-
+2/18/15: Joni Jimenez: Added load notes.
+2/23/15: Patrick Domingo: Fixed load notes.
+3/02/15: Patrick Domingo: Added delete notes.
 File Creation Date:
 Development Group: Cyan Worm
 Client Group: Blue Navy
@@ -124,7 +126,11 @@ public class NotesDAO {
           }
      }
 
-
+     /*
+          called when deleting a note
+          @param subject - subject of the note
+          @param note - title of the note
+      */
      public void deleteNote(String subject,String note){
           Toast.makeText(context,subject+note,Toast.LENGTH_SHORT).show();
           Notes temp;
@@ -157,6 +163,10 @@ public class NotesDAO {
           nnotes = newList;
      }
 
+     /*
+          called when loading the notes
+          @param subject - subject of the notes
+      */
      public List<Notes> loadNotes(String subject){
           try {
                Notes temp;

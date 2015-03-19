@@ -38,7 +38,7 @@ for the AY 2014-2015”.
 
 Code History:
 2/12/15: Patrick Leiniel H. Domingo: Notes Entity overhaul
-
+2/26/15: Joni Jimenez: Implemented parcelable
 
 File Creation Date:
 Development Group: Cyan Worm

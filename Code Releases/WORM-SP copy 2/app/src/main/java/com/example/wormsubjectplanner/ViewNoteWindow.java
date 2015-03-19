@@ -37,7 +37,9 @@ Department of Computer Science, College of Engineering, University of the Philip
 for the AY 2014-2015”.
 
 Code History:
-02/13/15 - Jannieca Camba. Added a pop-up window for inputting new note.
+02/16/15 - Jannieca Camba. Added UI for view note.
+02/18/15 - Joni Jimenez. Added fetching of title and content of the note.
+
 
 File Creation Date:
 Development Group: Cyan Worm
