@@ -1,4 +1,0 @@
-Code Review Results
-Sprint Review Results
-Sprint Retrospect
-Implementation Plan
