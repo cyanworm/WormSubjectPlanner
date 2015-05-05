@@ -126,13 +126,60 @@ public class NotesDAO {
           }
      }
 
+     public void editNote(String subject, String prevTitle, String newTitle, String newContent){
+         Notes temp;
+         String temp2;
+         List<Notes> newList = new ArrayList<Notes>();
+         for(int i = 0; i < nnotes.size();i++){
+             temp = nnotes.get(i);
+             if(temp.getTitle().equals(prevTitle)){
+                 temp.setTitle(newTitle);
+                 temp.setContent(newContent);
+             }
+             newList.add(temp);
+         }
+         File thisFile = new File (context.getFilesDir(),prevTitle + ".txt");
+         thisFile.delete();
+
+         File ffile = new File(newTitle + ".txt");
+         try{
+            /* fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+             fOut.write(newTitle.getBytes());
+             fOut.close();
+            */
+             fOut = context.openFileOutput(newTitle + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+             fOut.write(newContent.getBytes());
+             fOut.close();
+         }catch(Exception e){
+             Toast.makeText(context, (CharSequence) e, Toast.LENGTH_SHORT).show();
+         }
+
+
+         thisFile = new File(context.getFilesDir(), subject + ".txt");
+         thisFile.delete();
+         File file = new File(subject + ".txt");
+         for(int i = 0;  i < newList.size();i++){
+             temp = newList.get(i);
+             temp2 = temp.getTitle();
+             temp2 = temp2 +"\n";
+             try{
+                 fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+                 fOut.write(temp2.getBytes());
+                 fOut.close();
+             }catch(Exception e){
+                 Toast.makeText(context, (CharSequence) e, Toast.LENGTH_SHORT).show();
+             }
+         }
+         nnotes = newList;
+
+     }
+
      /*
           called when deleting a note
           @param subject - subject of the note
           @param note - title of the note
       */
      public void deleteNote(String subject,String note){
-          Toast.makeText(context,subject+note,Toast.LENGTH_SHORT).show();
           Notes temp;
           String temp2;
           List<Notes> newList = new ArrayList<Notes>();
@@ -156,6 +203,7 @@ public class NotesDAO {
                     fOut = context.openFileOutput(subject + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
                     fOut.write(temp2.getBytes());
                     fOut.close();
+                    Toast.makeText(context,"Successfully deleted note!",Toast.LENGTH_SHORT).show();
                }catch(Exception e){
                     Toast.makeText(context, (CharSequence) e, Toast.LENGTH_SHORT).show();
                }

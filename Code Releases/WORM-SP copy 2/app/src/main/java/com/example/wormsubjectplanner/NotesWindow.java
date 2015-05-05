@@ -38,9 +38,6 @@ for the AY 2014-2015”.
 
 Code History:
 02/13/15 - Jannieca Camba. Added a pop-up window for inputting new note.
-3/03/15 - Jannieca Camba. Added long on click listener for deleting note.
-3/03/15 - Joni Jimenez. Added delete in long on click listener.
-3/04/15 - Patrick Domingo. Fixed delete.
 
 File Creation Date:
 Development Group: Cyan Worm
@@ -61,13 +58,18 @@ import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,18 +87,21 @@ public class NotesWindow extends ActionBarActivity {
      String notesName;
      String notesContent;
      String buttonName;
+     String content;
+     String prevtitle;
+     String prevsubject;
      int buttonId;
      int buttonIdCount = 0;
-     int a;
+     int a,j;
 
      SubjectsDAO subjectDAO = Globals.subjectsDAO;
      List<Subjects> subjectList;
      Subjects noteSubject;
      Subjects currentSubj;
 
-     /*
-          onclicklistener for button press to view the note
-      */
+     String[] options = {"Edit", "Delete"};
+
+
      Button.OnClickListener btnclick = new Button.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -122,8 +127,6 @@ public class NotesWindow extends ActionBarActivity {
                startActivity(view_note_screen);
           }
      };
-
-
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -160,26 +163,6 @@ public class NotesWindow extends ActionBarActivity {
                //Toast.makeText(HomeWindow.getAppContext(), "Have NOT gotten to noteswindows", Toast.LENGTH_SHORT).show();
           }
 
-          /*Button home = (Button) findViewById(R.id.subjectnotes_home);
-          //home button to HomeWindow
-          home.setOnClickListener(new View.OnClickListener() {
-               public void onClick(View arg0) {
-                    Intent home_screen = new Intent(NotesWindow.this, HomeWindow.class);
-                    startActivity(home_screen);
-               }
-          });*/
-
-          /*
-   	     <Button
-        android:id="@+id/subjectnotes_home"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/home" />
-           */
-
           //button to add notes pop-up
           Button add_notes = (Button) findViewById(R.id.subjectnotes_add_note);
           add_notes.setOnClickListener(new View.OnClickListener() {
@@ -191,9 +174,10 @@ public class NotesWindow extends ActionBarActivity {
           viewNotes();
      }
 
-     /*
-          pop up window for adding a note
-      */
+     public boolean fileExists(String filename){
+          File f = new File(context.getFilesDir(),filename);
+          return f.exists();
+     }
      public void openPopup() {
           LayoutInflater inflater = LayoutInflater.from(this);
           View layout = inflater.inflate(R.layout.add_note, null);
@@ -212,19 +196,24 @@ public class NotesWindow extends ActionBarActivity {
 
           popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int data) {
-
-                    if (noteTitle.getText().toString().isEmpty()) {
-                         Context context = getApplicationContext();
-                         String text = "Invalid title";
-                         int time = Toast.LENGTH_SHORT;
-
-                         Toast toast = Toast.makeText(context, text, time);
-                         toast.show();
-                    } else {
+                    String temp2 = noteTitle.getText().toString();
+                    String text;
+                    Context context = getApplicationContext();
+                    int time = Toast.LENGTH_SHORT;
+                    if (temp2.isEmpty()) {
+                         text = "Invalid title";
+                         Toast.makeText(context, text, time).show();
+                    }
+                    else if(fileExists(temp2+".txt") == true) {
+                         text = "Title already exists, cannot have same title with a subject or a note";
+                         Toast.makeText(context, text, time).show();
+                    }
+                    else {
+                         //    createButton(noteTitle.getText().toString());
                          //    createButton(noteTitle.getText().toString());
                          notesContent = noteContent.getText().toString();
                          notesName = noteTitle.getText().toString();
-                         Toast.makeText(context, "Note created", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(context, "Note created!", Toast.LENGTH_SHORT).show();
                          notesDAO.createNote(sub, notesName, notesContent);
                     }
                     viewNotes();
@@ -236,9 +225,6 @@ public class NotesWindow extends ActionBarActivity {
           popup.show();
      }
 
-     /*
-          creates a button for each new note
-      */
      public void createButton(String value) {
           Button sub = new Button(this);
           sub.setText(value);
@@ -252,7 +238,8 @@ public class NotesWindow extends ActionBarActivity {
                public boolean onLongClick(View vButtonLong) {
                     buttonId = vButtonLong.getId();
                     buttonName = ((Button)vButtonLong).getText().toString();
-                    openDelete();
+                    //openDelete();
+                    openOptions();
                     return true;
                }
           });
@@ -260,9 +247,6 @@ public class NotesWindow extends ActionBarActivity {
           sub.setOnClickListener(btnclick);
      }
 
-     /*
-          list all existing notes
-      */
      public void viewNotes() {
 //      String string;
           ll.removeAllViews();
@@ -287,7 +271,8 @@ public class NotesWindow extends ActionBarActivity {
                          buttonId = vButtonLong.getId();
                          Button buttonDel = (Button)findViewById(buttonId);
                          buttonName = ((Button)vButtonLong).getText().toString();
-                         openDelete();
+                         //openDelete();
+                         openOptions();
                          return true;
                     }
                });
@@ -296,12 +281,8 @@ public class NotesWindow extends ActionBarActivity {
           }
 
      }
-     /*
-          pop up for deleting a note
-      */
+
      public void openDelete() {
-          LayoutInflater inflaterdel = LayoutInflater.from(this);
-          final String noteTitle = note;
           final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
           popupbddel.setTitle("Delete?");
           popupbddel.setCancelable(true);
@@ -344,4 +325,84 @@ public class NotesWindow extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}*/
+
+     public void openEdit() {
+          LayoutInflater inflater = LayoutInflater.from(this);
+          View layout = inflater.inflate(R.layout.add_note, null);
+
+          final EditText editNoteTitle = (EditText) layout.findViewById(R.id.addnotes_title_field);
+          final EditText editNoteContent = (EditText) layout.findViewById(R.id.addnotes_content_field);
+
+          prevtitle = buttonName;
+          editNoteTitle.setText(buttonName);
+
+          subjNotes = notesDAO.loadNotes(currentSubj.getSubjectName());
+          for(j = 0; j < subjNotes.size();j++){
+               if((subjNotes.get(j).getTitle()).equals(buttonName)){
+                    content = (subjNotes.get(j).getContent());
+                    break;
+              }
+          }
+
+          editNoteContent.setText(content);
+
+          final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
+          popupbd.setTitle("Edit Note");
+          popupbd.setCancelable(true);
+
+          popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+               }
+          });
+
+          popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int data) {
+                    String temp2 = editNoteTitle.getText().toString();
+                    Context context = getApplicationContext();
+                    String text;
+                    int time = Toast.LENGTH_SHORT;
+                    if (temp2.isEmpty() ) {
+                         text = "Invalid title";
+                         Toast.makeText(context, text, time).show();
+                    }
+                    else if(fileExists(temp2+".txt") == true) {
+                         text = "Title already exists, cannot have same title with a subject or a note";
+                         Toast.makeText(context, text, time).show();
+                    }
+                    else {
+                         notesContent = editNoteContent.getText().toString();
+                         notesName = editNoteTitle.getText().toString();
+
+                        notesDAO.editNote(sub, prevtitle, notesName, notesContent);
+
+
+
+                         //notesDAO.createNote(sub, notesName, notesContent);
+                    }
+                    viewNotes();
+               }
+          });
+
+          AlertDialog popup = popupbd.create();
+          popup.setView(layout);
+          popup.show();
+     }
+
+     public void openOptions() {
+          final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
+          popupbddel.setTitle("Note");
+          popupbddel.setCancelable(true);
+          popupbddel.setItems(options, new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick (DialogInterface dialog, int optionId) {
+                    if (optionId == 0)
+                         openEdit();
+                    if (optionId == 1)
+                         openDelete();
+               }
+          });
+
+          AlertDialog popupdel = popupbddel.create();
+          popupdel.show();
+     }
 }

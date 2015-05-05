@@ -74,21 +74,26 @@ import android.widget.Toast;
 import android.widget.LinearLayout;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 
 public class SubjectsWindow extends ActionBarActivity {
 
      LinearLayout ll;
      String subjectName;
      SubjectsDAO subjectsDAO;
-
+     List<Subjects> Subsubs;
+     Context context ;
      String temp = "";
      int a;
      List<Subjects> newList = new ArrayList<Subjects>();
 //    NotesDAO notes = new NotesDAO();
 
+     //Context context = HomeWindow.getApplicationContext();
      int buttonId;
      int buttonIdCount = 0;
      String buttonName;
+
+    String[] options = {"Edit", "Delete"};
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -97,26 +102,9 @@ public class SubjectsWindow extends ActionBarActivity {
 
           ll = (LinearLayout) findViewById(R.id.notes_subject_list);
           subjectsDAO = new SubjectsDAO();
+          context = HomeWindow.getAppContext();
 
-          /*Button home = (Button)findViewById(R.id.notes_home);
-          //home button to HomeWindow
-          home.setOnClickListener(new View.OnClickListener() {
-               public void onClick(View arg0) {
-                    Intent home_screen = new Intent(SubjectsWindow.this, HomeWindow.class);
-                    startActivity(home_screen);
-               }
-          });*/
 
-          /*
-     	<Button
-        android:id="@+id/notes_home"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/home" />
-           */
 
           //button to add subjects pop-up
           Button add_notes = (Button) findViewById(R.id.notes_add_subject);
@@ -130,6 +118,21 @@ public class SubjectsWindow extends ActionBarActivity {
 
      }
 
+     public boolean fileExists(String filename){
+
+          File f4 = context.getFilesDir();
+        //  String[] files = f4.list();
+        //  for(int i = 0; i < files.length;i++){
+             //  File f5 = new File(f4, files[i]);
+            //   if(files[i].equals("Subjects.txt") == false) f5.delete();
+          //     System.out.println(files[i]);
+         // }
+          //System.out.println(f4.toString());
+          //File f5 = new File(f4, "Try.txt"); try { f5.delete();}catch(Exception e){}
+          File f = new File(f4, filename);
+          System.out.println("File " + filename + " " + f.exists());
+          return f.exists();
+     }
      /*
           pop-up for adding a subject
       */
@@ -152,18 +155,27 @@ public class SubjectsWindow extends ActionBarActivity {
                @TargetApi(Build.VERSION_CODES.GINGERBREAD)
                public void onClick(DialogInterface dialog, int data) {
                     int time = Toast.LENGTH_SHORT;
+                    String temp2 = addsubj.getText().toString();
+                    String text;
                     Context context = getApplicationContext();
-                    if (addsubj.getText().toString().isEmpty()) {
-                         String text = "Invalid subject";
+                    if (temp2.isEmpty()) {
+                         text = "Invalid subject";
                          Toast.makeText(context, text, time).show();
 
                     }
+                    else if (fileExists(temp2 + ".txt") == true){
+                         text = "Title already exists, cannot have same title with a subject or a note";
+                         Toast.makeText(context, text, time).show();
+                    }
 
                     else {
-                         subjectName = addsubj.getText().toString();
+                         subjectName = temp2;
                          subjectsDAO.createSubject(subjectName);
                          Toast.makeText(context, "Subject created", time).show();
                          viewSubjects();
+                //         Intent myIntent = getIntent();
+                 //        finish();
+                 //        startActivity(myIntent);
                     }
                }
           });
@@ -213,7 +225,7 @@ public class SubjectsWindow extends ActionBarActivity {
                          buttonId = vButtonLong.getId();
                          buttonName = ((Button)vButtonLong).getText().toString();
 
-                         openDelete();
+                         openOptions();
 
                          return true;
                     }
@@ -225,11 +237,9 @@ public class SubjectsWindow extends ActionBarActivity {
           pop-up for deleting a subject
       */
      public void openDelete() {
-          LayoutInflater inflaterdel = LayoutInflater.from(this);
-          View layoutdel = inflaterdel.inflate(R.layout.empty, null);
 
           final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
-          popupbddel.setTitle("Delete?");
+          popupbddel.setTitle("Warning:All notes inside the subject will be deleted. Delete?");
           popupbddel.setCancelable(true);
 
           popupbddel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -250,6 +260,52 @@ public class SubjectsWindow extends ActionBarActivity {
           popupdel.show();
      }
 
+     public void openEdit() {
+         LayoutInflater inflater = LayoutInflater.from(this);
+         View layout = inflater.inflate(R.layout.add_subject, null);
+
+         final EditText editSubjectTitle = (EditText) layout.findViewById(R.id.add_subject_value);
+
+         final String prevtitle = buttonName;
+         editSubjectTitle.setText(buttonName);
+
+        final AlertDialog.Builder popupbd = new AlertDialog.Builder(this);
+        popupbd.setTitle("Edit Subject Title");
+        popupbd.setCancelable(true);
+
+        popupbd.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int data) {
+            }
+        });
+
+        popupbd.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int data) {
+                 String temp2 = editSubjectTitle.getText().toString();
+                 String text;
+                 int time = Toast.LENGTH_SHORT;
+                 Context context = getApplicationContext();
+                 if (temp2.isEmpty()) {
+                      text = "Invalid subject";
+                      Toast.makeText(context, text, time).show();
+                 }
+                 else if (fileExists(temp2 + ".txt") == true){
+                      text = "Title already exists, cannot have same title with a subject or a note";
+                      Toast.makeText(context, text, time).show();
+                 }
+                else {
+                    String newTitle = editSubjectTitle.getText().toString();
+                    subjectsDAO.editSubject(prevtitle, newTitle);
+                    //notesDAO.createNote(sub, notesName, notesContent);
+                }
+                viewSubjects();
+            }
+        });
+
+        AlertDialog popup = popupbd.create();
+        popup.setView(layout);
+        popup.show();
+    }
+
      @Override
      public boolean onCreateOptionsMenu(Menu menu) {
           // Inflate the menu; this adds items to the action bar if it is present.
@@ -269,4 +325,21 @@ public class SubjectsWindow extends ActionBarActivity {
           return super.onOptionsItemSelected(item);
      }
 
+    public void openOptions() {
+        final AlertDialog.Builder popupbddel = new AlertDialog.Builder(this);
+        popupbddel.setTitle("Subject");
+        popupbddel.setCancelable(true);
+        popupbddel.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick (DialogInterface dialog, int optionId) {
+                if (optionId == 0)
+                    openEdit();
+                if (optionId == 1)
+                    openDelete();
+            }
+        });
+
+        AlertDialog popupdel = popupbddel.create();
+        popupdel.show();
+    }
 }

@@ -48,7 +48,6 @@ Purpose of software: WORM Subject Planner is a mobile platform application made 
 
 */
 
-
 package com.example.wormsubjectplanner;
 
 import android.support.v7.app.ActionBarActivity;
@@ -59,6 +58,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class HomeWindow extends ActionBarActivity {
@@ -72,17 +72,43 @@ public class HomeWindow extends ActionBarActivity {
         setContentView(R.layout.home);
         
         Button main_notes = (Button)findViewById(R.id.main_notes);
-        HomeWindow.context = getApplicationContext();
+        Button main_calendar = (Button)findViewById(R.id.main_calendar);
+        Button main_tasks = (Button)findViewById(R.id.main_tasks);
+
+        context = getApplicationContext();
 
         //notes button to SubjectsWindow
         main_notes.setOnClickListener(new View.OnClickListener()
         {
         	public void onClick(View arg0)
         	{
-        		Intent notes_screen = new Intent(HomeWindow.this, SubjectsWindow.class);
+        		Intent notes_screen = new Intent(HomeWindow.this, com.example.wormsubjectplanner.SubjectsWindow.class);
         		startActivity(notes_screen);
         	}
         });
+
+        //calendar button to CalendarWindow
+        main_calendar.setOnClickListener(new View.OnClickListener() {
+             public void onClick (View arg0) {
+                  int time = Toast.LENGTH_SHORT;
+                  Toast toast = Toast.makeText(context, "This feature is not yet available. Sorry :) ", time);
+                  toast.show();
+
+                  //Intent calendar_screen = new Intent(HomeWindow.this, CalendarWindow.class);
+                  //startActivity(calendar_screen);
+             }
+        });
+
+         //notes button to TasksWindow
+         main_tasks.setOnClickListener(new View.OnClickListener()
+         {
+              public void onClick(View arg0)
+              {
+                   int time = Toast.LENGTH_SHORT;
+                   Intent tasks_screen = new Intent(HomeWindow.this, com.example.wormsubjectplanner.TasksWindow.class);
+                   startActivity(tasks_screen);
+              }
+         });
     }
 
 

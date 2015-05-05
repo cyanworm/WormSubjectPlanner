@@ -72,7 +72,7 @@ public class SubjectsDAO {
      InputStreamReader isr;
      BufferedReader br;
 //    BufferedReader brr;
-//    NotesDAO notesDAO = new NotesDAO();
+      NotesDAO notesDAO = new NotesDAO();
 
      public SubjectsDAO(){
           context = HomeWindow.getAppContext();
@@ -104,11 +104,8 @@ public class SubjectsDAO {
        append subject in the arraylist of subjects*/
      public void createSubject(String subjectName) {
           try {
-               File crfile = new File(subjectName + ".txt" );
-        /*    if(crfile == null || !crfile.exists()) {
-
-                crfile.createNewFile();
-           }*/
+               File crfile = new File(context.getFilesDir(), subjectName + ".txt" );
+             // crfile.createNewFile();
                //    ffOut = context.openFileOutput(subjectName + ".txt", Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
                Subjects newSubject = new Subjects(subjectName);
 
@@ -121,6 +118,37 @@ public class SubjectsDAO {
           }
      }
 
+    public void editSubject(String prevSub, String newSub){
+        List<Subjects> gget = getSubjectsList();
+        List<Notes> ggetnotes = notesDAO.loadNotes(prevSub);
+        for(int i = 0; i < gget.size();i++){
+            if(gget.get(i).getSubjectName().equals(prevSub)){
+                gget.get(i).setSubjectName(newSub);
+                break;
+            }
+        }
+
+        File thisFile = new File(context.getFilesDir(), sb);
+        thisFile.delete();
+        File file = new File(sb);
+        for(int i = 0;  i < gget.size();i++){
+            Subjects temp = gget.get(i);
+            String temp2 = temp.getSubjectName();
+            temp2 = temp2 +"\n";
+            try{
+                fOut = context.openFileOutput(sb, Context.MODE_WORLD_READABLE | Context.MODE_APPEND);
+                fOut.write(temp2.getBytes());
+                fOut.close();
+            }catch(Exception e){
+                Toast.makeText(context, (CharSequence) e, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        File file1 = new File(prevSub+".txt");
+        File file2 = new File(newSub+".txt");
+
+        file1.renameTo(file2);
+    }
      /*
           called for deleting a subject
      */
