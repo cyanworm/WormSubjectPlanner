@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wormsubjectplanner"
-    android:versionCode="1"
-    android:versionName="1.0" >
+          package="com.example.wormsubjectplanner"
+          android:versionCode="1"
+          android:versionName="1.0" >
+
+    <supports-screens android:resizeable="false"
+                    android:normalScreens="true"
+                    android:largeScreens="true"
+                    android:xlargeScreens="true" />
+
+    <compatible-screens>
+        <!-- all normal size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="normal" />
+        <!-- large screens -->
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="large" />
+        <!-- xlarge screens -->
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="xlarge" />
+    </compatible-screens>
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -31,12 +66,12 @@
         </activity>
         <activity
             android:name=".SubjectsWindow"
-            android:label="@string/title_activity_notes"
+            android:label="@string/subjects"
             android:parentActivityName=".HomeWindow" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeWindow" />
-    </activity>
+        </activity>
         <activity
             android:name=".NotesWindow"
             android:label="@string/title_activity_subject_notes"
@@ -46,12 +81,8 @@
                 android:value=".SubjectsWindow" />
         </activity>
         <activity
-            android:name=".ViewNoteWindow"
-            android:label="@string/title_activity_view_note_window"
-            android:parentActivityName=".NotesWindow" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NotesWindow" />
+            android:name=".TasksWindow"
+            android:label="@string/title_activity_tasks_window" >
         </activity>
     </application>
 

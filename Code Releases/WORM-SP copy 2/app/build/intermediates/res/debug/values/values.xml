@@ -197,14 +197,18 @@
     <string name="hello_world">Hello world!</string>
     <string name="others_other">Other</string>
     <string name="subject">Subject</string>
+    <string name="subjects">Subjects</string>
     <string name="title">Title</string>
     <string name="title_activity_add_notes">Add Note</string>
     <string name="title_activity_calendar">Calendar</string>
+    <string name="title_activity_calendar_window">CalendarWindow</string>
     <string name="title_activity_customize">Customize</string>
+    <string name="title_activity_edit_note_window">EditNoteWindow</string>
     <string name="title_activity_main">Home</string>
     <string name="title_activity_notes">Notes</string>
     <string name="title_activity_subject_notes">Notes</string>
     <string name="title_activity_tasks">Tasks</string>
+    <string name="title_activity_tasks_window">Tasks</string>
     <string name="title_activity_view_note_window">Note</string>
     <string name="title_activity_view_notes">View Notes</string>
     <!-- From: file:/C:/Users/Patrick/Desktop/WormSubjectPlanner/Code%20Releases/WORM-SP%20copy%202/app/src/main/res/values/styles.xml -->
