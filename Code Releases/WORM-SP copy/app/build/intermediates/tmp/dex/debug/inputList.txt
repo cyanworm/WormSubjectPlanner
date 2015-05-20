@@ -1,5 +1,0 @@
-C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy\app\build\intermediates\classes\debug
-C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-2347d8da6abef7b5dd1385ff704323b1cc91ef73.jar
-C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-1ca238936a934764639900a5fd7e56b87a64d0bd.jar
-C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy\app\build\intermediates\pre-dexed\debug\classes-cc74210f5abc4e7f0f5b4abc52fded03168182de.jar
-C:\Users\Patrick\Desktop\WormSubjectPlanner\Code Releases\WORM-SP copy\app\build\intermediates\pre-dexed\debug\classes-4c107a3b1149962cf67393c0fcb11272c6143fd7.jar
