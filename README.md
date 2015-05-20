@@ -5,6 +5,7 @@ CS 191/192 Project: Worm Subject Planner
 
 THE BETA-TESTED VERSION IS NOW RELEASED!!!
 Visit our website for more info: http://wwww.cyan-worm.blogspot.com
+--------------
 
 Available Features:
 - Subjects Related
